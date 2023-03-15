@@ -1,0 +1,114 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/static/styles.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
+    />
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"
+    ></script>
+    <title>{{title}}</title>
+  </head>
+  <body>
+    <!-- header  -->
+    <header class="header">
+      <a href="/" class="logo"><i class="fas fa-kiwi-bird"></i>Kiwie
+      </a>
+
+      <form action="" class="search-form">
+        <input type="search" id="form-input" placeholder="Search..." />
+        <label for="form-input" class="fas fa-search"></label>
+      </form>
+
+      <div class="icons">
+        <div id="menu-btn" class="fas fa-bars"></div>
+        <div id="search-btn" class="fas fa-search"></div>
+        <a href="#" class="fas fa-user"></a>
+        <a href="#" class="fas fa-heart"></a>
+        <a href="#" class="fas fa-shopping-cart"></a>
+      </div>
+    </header>
+
+    <!-- header  -->
+
+    {{! errors }}
+    {{#if errors}}
+      {{#each errors}}
+        <p>{{msg}}</p>
+      {{/each}}
+    {{/if}}
+    {{! errors }}
+
+    <!-- side-bar  -->
+    <div class="side-bar">
+      <div id="close-side-bar" class="fas fa-times"></div>
+
+      <div class="user">
+        <img src="/static/images/picture.jpg" />
+        <h3>Dimitar Zlatev</h3>
+        <a href="/logout">Log out</a>
+      </div>
+
+      <nav class="navbar">
+        <a href="/"> <i class="fas fa-angle-right"></i>home</a>
+        <a href="#"> <i class="fas fa-angle-right"></i>about</a>
+        <a href="#"> <i class="fas fa-angle-right"></i>products</a>
+        <a href="#"> <i class="fas fa-angle-right"></i>contact</a>
+        <a href="/login"> <i class="fas fa-angle-right"></i>login</a>
+        <a href="/register"> <i class="fas fa-angle-right"></i>register</a>
+        <a href="#"> <i class="fas fa-angle-right"></i>cart</a>
+      </nav>
+    </div>
+    <!-- side-bar  -->
+
+    <!-- home  -->
+
+    {{{body}}}
+
+    <!-- home  -->
+
+    <!-- footer  -->
+
+    <section class="quick-links">
+      <a href="/" class="logo"><i class="fas fa-kiwi-bird"></i>Kiwie
+      </a>
+
+      <div class="links">
+        <a href="#">home</a>
+        <a href="#">about</a>
+        <a href="#">products</a>
+        <a href="#">contact</a>
+        <a href="/login">login</a>
+        <a href="/register">register</a>
+        <a href="#">cart</a>
+      </div>
+
+      <div class="share">
+        <a href="#" class="fab fa-facebook"></a>
+        <a href="#" class="fab fa-twitter"></a>
+        <a href="#" class="fab fa-instagram"></a>
+        <a href="#" class="fab fa-linkedin"></a>
+      </div>
+    </section>
+
+    <section class="credit">
+      <p>created by <span>Kirila Ilieva</span> | all rights reserved!</p>
+      <img src="/static/images/card_img.png" alt="" />
+    </section>
+    <!-- footer  -->
+
+    <!-- js -->
+    <script src="/static/scripts/swiper.js"></script>
+    <script src="/static/scripts//menu.js"></script>
+  </body>
+</html>

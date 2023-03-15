@@ -1,0 +1,49 @@
+<div class="container">
+  <form class="register-form" action="/register" method="post">
+    <h1>Sign Up</h1>
+    <input
+      type="text"
+      class="form-input"
+      placeholder="First name..."
+      name="firstName"
+      value="{{data.firstName}}"
+    />
+    <input
+      type="text"
+      class="form-input"
+      placeholder="Last name..."
+      name="lastName"
+      value="{{data.lastName}}"
+    />
+    <input
+      type="text"
+      class="form-input"
+      placeholder="Image URL..."
+      name="image"
+      value="{{data.image}}"
+    />
+    <input
+      type="text"
+      class="form-input"
+      placeholder="Email..."
+      name="email"
+      value="{{data.email}}"
+    />
+    <input
+      type="password"
+      class="form-input"
+      placeholder="Password..."
+      name="password"
+    />
+    <input
+      type="password"
+      class="form-input"
+      placeholder="Repeat Password"
+      name="repass"
+    />
+    <div class="buttons">
+      <button type="submit">Sign Up</button>
+      <a href="/login">Already Have An Account?</a>
+    </div>
+  </form>
+</div>

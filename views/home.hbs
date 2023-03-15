@@ -1,0 +1,22 @@
+<section class="home">
+  <div class="swiper home-slider">
+    <div class="swiper-wrapper">
+      <!-- products  -->
+      {{#each products}}
+        <div class="swiper-slide slide">
+          <div class="image">
+            <img src="{{image}}" />
+          </div>
+          <div class="content">
+            <p>{{price}}</p>
+            <h3>{{type}}</h3>
+            <h4>{{shortDescription}}</h4>
+            <a class="btn" href="/details/{{_id}}">Shop Now!</a>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div>
+</section>
