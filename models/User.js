@@ -18,7 +18,7 @@ const userSchema = new Schema({
   image: {
     type: String,
     minlength: [10, "Image must be at least 10 characters long"],
-    required: [true, "Email is required"],
+    required: [true, "Image is required"],
   },
   email: {
     type: String,

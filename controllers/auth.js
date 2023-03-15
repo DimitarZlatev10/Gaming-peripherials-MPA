@@ -1,4 +1,4 @@
-const { register } = require("../services/user");
+const { register, login } = require("../services/user");
 const { mapErrors } = require("../utils/errorDisplayer");
 
 const router = require("express").Router();
@@ -36,6 +36,22 @@ router.post("/register", async (req, res) => {
       email: req.body.email,
     };
     res.render("register", { title: "Register Page", data, errors });
+  }
+});
+
+router.get("/login", (req, res) => {
+  res.render("login", { title: "Login Page" });
+});
+
+router.post("/login", async (req, res) => {
+  try {
+    const user = await login(req.body.email, req.body.password);
+    req.session.user = user;
+    res.redirect("/");
+  } catch (err) {
+    console.error(err);
+    const errors = mapErrors(err);
+    res.render("login", { title: "Login Page", email: req.body.email, errors });
   }
 });
 

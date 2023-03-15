@@ -23,6 +23,23 @@ async function register(firstName, lastName, image, email, password) {
   return user;
 }
 
+async function login(email, password) {
+  const user = await User.findOne({ email: email });
+
+  if (!user) {
+    throw new Error("Incorrect email or password");
+  }
+
+  const hasMatch = await compare(password, user.hashedPassword);
+
+  if (!hasMatch) {
+    throw new Error("Incorrect email or password");
+  }
+
+  return user;
+}
+
 module.exports = {
   register,
+  login,
 };
