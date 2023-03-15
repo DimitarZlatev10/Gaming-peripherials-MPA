@@ -43,9 +43,14 @@
 
     {{! errors }}
     {{#if errors}}
-      {{#each errors}}
-        <p>{{msg}}</p>
-      {{/each}}
+      <div class="errorContainer">
+        {{#each errors}}
+          <div class="error-message">
+            <p>{{msg}}</p>
+            <div>X</div>
+          </div>
+        {{/each}}
+      </div>
     {{/if}}
     {{! errors }}
 

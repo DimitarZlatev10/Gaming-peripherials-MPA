@@ -83,6 +83,56 @@
 
 /* header  */
 
+/* error-container  */
+
+/* .errorContainer {
+  position: fixed;
+  right: 100px;
+  min-width: 100px;
+  display: block;
+  z-index: 11111;
+  top: 100px;
+  text-align: center;
+  border-radius: 20px;
+  color: rgb(255, 255, 255);
+  height: auto;
+  width: 320px;
+  box-shadow: 0 5px 10px #ffeae7;
+} */
+
+.errorContainer {
+  display: block;
+  position: fixed;
+  right: 100px;
+  top: 100px;
+  z-index: 11111;
+}
+
+.error-message {
+  display: flex;
+  justify-content: space-between;
+  background-color: black;
+  color: white;
+  margin-top: 5px;
+  padding: 20px;
+  border-radius: 20px;
+  width: 320px;
+}
+
+.error-message > p {
+  font-size: 20px;
+}
+
+.error-message > div {
+  font-size: 20px;
+}
+
+.error-message > div:hover{
+  color: red;
+  cursor: pointer;
+}
+/* error container  */
+
 /* side-bar  */
 
 .side-bar {
@@ -495,7 +545,7 @@
   cursor: pointer;
 }
 
-.delete-comment:hover{
+.delete-comment:hover {
   color: red;
 }
 

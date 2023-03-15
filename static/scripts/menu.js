@@ -12,3 +12,13 @@ closeSideBarMenu.onclick = () => {
   sideBarMenu.style.left = "-120%";
   sideBarMenu.style.boxShadow = "";
 };
+
+//errors
+const errorContainer = document.querySelector(".errorContainer");
+const errorMessages = document.querySelectorAll(".error-message > div");
+
+errorMessages.forEach((e) => {
+  e.addEventListener("click", (e) => {
+    errorContainer.removeChild(e.target.parentElement);
+  });
+});
