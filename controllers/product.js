@@ -43,23 +43,28 @@ router.get("/details/:id", async (req, res) => {
 });
 
 router.post("/addComment/:id", isUser(), async (req, res) => {
-  const commentInfo = {
-    _id: new ObjectId(),
-    username: `${req.session.user.firstName} ${req.session.user.lastName}`,
-    rating: req.body.rating,
-    comment: req.body.comment,
-    owner: req.session.user._id,
-    productId: req.params.id,
-    userImage: req.session.user.image,
-  };
-
   try {
+    if ((req.body.rating > 5 && req.body.rating < 1) || req.body.rating == "") {
+      throw new Error("Rating is required and must be between 1 and 5");
+    }
+
+    const commentInfo = {
+      _id: new ObjectId(),
+      username: `${req.session.user.firstName} ${req.session.user.lastName}`,
+      rating: req.body.rating,
+      comment: req.body.comment,
+      owner: req.session.user._id,
+      productId: req.params.id,
+      userImage: req.session.user.image,
+    };
+
     await addComment(req.params.id, commentInfo);
     res.redirect("/details/" + req.params.id);
   } catch (err) {
-    console.error(err);
+    console.error(err.message);
     const errors = mapErrors(err);
-    res.render("details", { title: "Details", errors });
+    const product = await getProductById(req.params.id);
+    res.render("details", { title: `${product.title}`, errors, product });
   }
 });
 
