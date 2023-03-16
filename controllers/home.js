@@ -5,7 +5,9 @@ const router = require("express").Router();
 router.get("/", async (req, res) => {
   const products = await getAllPosts();
 
-  res.render("home", { title: "Home Page", products });
+  const userInfo = req.session.user;
+  console.log(userInfo);
+  res.render("home", { title: "Home Page", products, userInfo });
 });
 
 module.exports = router;

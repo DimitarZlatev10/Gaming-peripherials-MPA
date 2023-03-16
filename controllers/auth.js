@@ -1,13 +1,14 @@
+const { isGuest, isUser } = require("../middlewares/guards");
 const { register, login } = require("../services/user");
 const { mapErrors } = require("../utils/errorDisplayer");
 
 const router = require("express").Router();
 
-router.get("/register", (req, res) => {
+router.get("/register", isGuest(), (req, res) => {
   res.render("register", { title: "Register Page" });
 });
 
-router.post("/register", async (req, res) => {
+router.post("/register", isGuest, async (req, res) => {
   try {
     if (req.body.password.trim() < 4) {
       throw new Error("Password must be at least 4 characters long!");
@@ -39,11 +40,11 @@ router.post("/register", async (req, res) => {
   }
 });
 
-router.get("/login", (req, res) => {
+router.get("/login", isGuest(), (req, res) => {
   res.render("login", { title: "Login Page" });
 });
 
-router.post("/login", async (req, res) => {
+router.post("/login", isGuest(), async (req, res) => {
   try {
     const user = await login(req.body.email, req.body.password);
     req.session.user = user;
@@ -53,6 +54,11 @@ router.post("/login", async (req, res) => {
     const errors = mapErrors(err);
     res.render("login", { title: "Login Page", email: req.body.email, errors });
   }
+});
+
+router.get("/logout", isUser(), (req, res) => {
+  delete req.session.user;
+  res.redirect("/");
 });
 
 module.exports = router;

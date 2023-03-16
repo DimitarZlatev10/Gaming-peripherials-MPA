@@ -58,11 +58,13 @@
     <div class="side-bar">
       <div id="close-side-bar" class="fas fa-times"></div>
 
-      <div class="user">
-        <img src="/static/images/picture.jpg" />
-        <h3>Dimitar Zlatev</h3>
-        <a href="/logout">Log out</a>
-      </div>
+      {{#if userInfo}}
+        <div class="user">
+          <img src="{{userInfo.image}}" />
+          <h3>{{userInfo.firstName}} {{userInfo.lastName}}</h3>
+          <a href="/logout">Log out</a>
+        </div>
+      {{/if}}
 
       <nav class="navbar">
         <a href="/"> <i class="fas fa-angle-right"></i>home</a>
