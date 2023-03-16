@@ -8,7 +8,7 @@ router.get("/register", isGuest(), (req, res) => {
   res.render("register", { title: "Register Page" });
 });
 
-router.post("/register", isGuest, async (req, res) => {
+router.post("/register", isGuest(), async (req, res) => {
   try {
     if (req.body.password.trim() < 4) {
       throw new Error("Password must be at least 4 characters long!");

@@ -58,7 +58,7 @@
     <div class="side-bar">
       <div id="close-side-bar" class="fas fa-times"></div>
 
-      {{#if userInfo}}
+      {{#if hasUser}}
         <div class="user">
           <img src="{{userInfo.image}}" />
           <h3>{{userInfo.firstName}} {{userInfo.lastName}}</h3>
@@ -71,9 +71,13 @@
         <a href="#"> <i class="fas fa-angle-right"></i>about</a>
         <a href="#"> <i class="fas fa-angle-right"></i>products</a>
         <a href="#"> <i class="fas fa-angle-right"></i>contact</a>
-        <a href="/login"> <i class="fas fa-angle-right"></i>login</a>
-        <a href="/register"> <i class="fas fa-angle-right"></i>register</a>
-        <a href="#"> <i class="fas fa-angle-right"></i>cart</a>
+        {{#if hasUser}}
+          <a href="#">
+            <i class="fas fa-angle-right"></i>{{user.firstName}}'s cart</a>
+        {{else}}
+          <a href="/login"> <i class="fas fa-angle-right"></i>login</a>
+          <a href="/register"> <i class="fas fa-angle-right"></i>register</a>
+        {{/if}}
       </nav>
     </div>
     <!-- side-bar  -->
@@ -95,9 +99,12 @@
         <a href="#">about</a>
         <a href="#">products</a>
         <a href="#">contact</a>
-        <a href="/login">login</a>
-        <a href="/register">register</a>
-        <a href="#">cart</a>
+        {{#if hasUser}}
+          {{!-- <a href="#">{{user.firstName}}'s cart</a> --}}
+        {{else}}
+          <a href="/login">login</a>
+          <a href="/register">register</a>
+        {{/if}}
       </div>
 
       <div class="share">
