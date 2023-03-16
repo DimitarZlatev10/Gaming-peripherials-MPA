@@ -1,0 +1,81 @@
+<div class="details-container">
+  <div class="product-container">
+    <img src="{{product.image}}" alt="" />
+    <h1>{{product.title}}</h1>
+    <!-- <p>The newest and best iphone 12</p> -->
+    <p>
+      {{#if finalRating}}
+        Rating:
+        {{finalRating}}/5
+        <span>({{totalReviews}} Reviews)</span>
+      {{else}}
+        There are no reviews for this product!
+      {{/if}}
+    </p>
+    <h2>{{product.price}}$</h2>
+    <button>Add to cart!</button>
+    <h3>{{product.description}}</h3>
+  </div>
+</div>
+
+<div class="comment-section-container-background">
+  <div class="comment-section-container">
+    <div class="comment-section">
+
+      {{#if hasUser}}
+        <form
+          action="/addComment/{{product._id}}"
+          method="post"
+          class="comment-form"
+        >
+          <h1>
+            {{#if totalReviews}}Leave your review here!{{else}}Be the first to
+              leave a review!{{/if}}</h1>
+          <div class="rating-container">
+            <input
+              type="number"
+              name="rating"
+              class="form-input"
+              placeholder="Rate 0/5"
+              min="1"
+              max="5"
+            />
+          </div>
+
+          <input
+            type="text"
+            name="comment"
+            class="form-input"
+            placeholder="Your Comment..."
+          />
+
+          <button type="submit">Comment!</button>
+        </form>
+      {{else}}
+        <div class="noUser">
+          <h1>You need to log in to leave a review</h1>
+          <a href="/login">Login</a>
+        </div>
+      {{/if}}
+    </div>
+
+    <div class="user-comments">
+      {{#each product.comments}}
+        <div class="comment">
+          <div class="user-image">
+            {{#if isOwner}}
+              <a
+                href="/deleteComment/{{productId}}/{{_id}}"
+                class="delete-comment"
+              >delete</a>
+            {{/if}}
+            <img src="{{userImage}}" />
+            <h1>{{username}}</h1>
+          </div>
+          <h3>{{comment}}</h3>
+          <p>Rating: {{rating}}/5</p>
+        </div>
+      {{/each}}
+    </div>
+  </div>
+</div>

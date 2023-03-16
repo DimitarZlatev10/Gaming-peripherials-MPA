@@ -85,21 +85,6 @@
 
 /* error-container  */
 
-/* .errorContainer {
-  position: fixed;
-  right: 100px;
-  min-width: 100px;
-  display: block;
-  z-index: 11111;
-  top: 100px;
-  text-align: center;
-  border-radius: 20px;
-  color: rgb(255, 255, 255);
-  height: auto;
-  width: 320px;
-  box-shadow: 0 5px 10px #ffeae7;
-} */
-
 .errorContainer {
   display: block;
   position: fixed;
@@ -127,7 +112,7 @@
   font-size: 20px;
 }
 
-.error-message > div:hover{
+.error-message > div:hover {
   color: red;
   cursor: pointer;
 }
@@ -469,19 +454,7 @@
   justify-content: space-between;
 }
 
-/* .rating-container > #username {
-  border: 1px solid pink;
-  width: 200px;
-  padding: 10px 10px 10px 5px;
-  margin-top: 20px;
-  margin-left: 10px;
-}
-
-.rating-container > #username::placeholder {
-  font-size: 15px;
-} */
-
-.rating-container > #rating {
+input[name="rating"] {
   border: 1px solid pink;
   width: 90px;
   padding: 10px 10px 10px 5px;
@@ -490,11 +463,11 @@
   margin-left: 10px;
 }
 
-.rating-container > #rating::placeholder {
+input[name="rating"]::placeholder {
   font-size: 15px;
 }
 
-.comment-form > #comment {
+input[name="comment"] {
   border: 1px solid pink;
   margin-left: 10px;
   margin-top: 30px;
@@ -503,7 +476,7 @@
   padding: 5px 0 100px 5px;
 }
 
-.comment-form > #comment::placeholder {
+input[name="comment"]::placeholder {
   font-size: 15px;
 }
 
@@ -543,6 +516,7 @@
   padding: 2px 5px 2px 5px;
   font-weight: bold;
   cursor: pointer;
+  color: black;
 }
 
 .delete-comment:hover {
@@ -627,7 +601,7 @@
 }
 
 .swiper-button-prev {
-  padding-left: 30px;
+  padding-left: 100px;
 }
 
 .swiper-button-next:hover,
