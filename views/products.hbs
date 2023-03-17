@@ -1,0 +1,87 @@
+{{!-- <div class="results-sort-container">
+  <div class="results-container">
+    <label for="results">Results:</label>
+    <select name="results" id="results" onchange="location = this.value">
+      <option value="/products?page={{page}}&productsPerPage=5">5</option>
+      <option
+        selected="true"
+        value="/products?page={{page}}&productsPerPage=10"
+      >10</option>
+      <option value="/products?page={{page}}&productsPerPage=15">15</option>
+    </select>
+  </div>
+  <div class="sort-container">
+    <label for="sort">Sort by:</label>
+    <select name="sort" id="sort">
+      <option value="lowest">Lowest price</option>
+      <option value="highest">Highest price</option>
+    </select>
+  </div>
+</div> --}}
+
+ <div class="product-types-navigation">
+  <div class="products-links">
+    <a href="#">Smartphones</a>
+    <a href="#">Smartwatches</a>
+    <a href="#">Headphones</a>
+  </div>
+</div> 
+
+<div class="products-container">
+  <div class="results-sort-container">
+    <div class="results-container">
+      <label for="results">Results:</label>
+      <select name="results" id="results" onchange="location = this.value">
+        <option {{#if selectedProductsPerPage.selectedFive}} selected="true" {{/if}}  value="/products?page={{page}}&productsPerPage=5">5</option>
+        <option {{#if selectedProductsPerPage.selectedTen}} selected="true" {{/if}} value="/products?page={{page}}&productsPerPage=10">10</option>
+        <option {{#if selectedProductsPerPage.selectedFifteen}} selected="true" {{/if}} value="/products?page={{page}}&productsPerPage=15">15</option>
+      </select>
+    </div>
+    <div class="sort-container">
+      <label for="sort">Sort by:</label>
+      <select name="sort" id="sort">
+        <option value="lowest">Lowest price</option>
+        <option value="highest">Highest price</option>
+      </select>
+    </div>
+  </div>
+
+  {{! product  }}
+
+  {{#each products}}
+    <div class="product">
+      <div class="product-image-container">
+        {{#if available}}
+        <i class="fas fa-check available"></i>
+        {{else}}
+        <i class="fas fa-ban unavailable"></i>
+        {{/if}}
+        <a href="/details/{{_id}}"><img src="{{image}}" alt="" /> </a>
+      </div>
+      <h1>
+        {{title}}
+      </h1>
+      <h2>
+        {{shortDescription}}
+      </h2>
+      <p>{{price}}.00$</p>
+      <div class="buttons-container">
+        <a href="#"> <i class="fas fa-shopping-cart"></i></a>
+        <a href="#"> <i class="fas fa-heart"></i></a>
+      </div>
+    </div>
+
+  {{/each}}
+
+  {{! product  }}
+
+  <div class="pagination-container">
+    {{#each pageIndex}}
+
+      <a
+        href="/products?page={{page}}&productsPerPage={{productsPerPage}}" {{#if currentPage}} class="currentPage" {{/if}}
+      >{{page}}</a>
+
+    {{/each}}
+  </div>
+</div>

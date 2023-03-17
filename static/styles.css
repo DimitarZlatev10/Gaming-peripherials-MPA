@@ -671,6 +671,204 @@ input[name="comment"]::placeholder {
 
 /* home  */
 
+/* products  */
+
+.product-types-navigation {
+  background-color: red;
+  color: black;
+  width: 300px;
+  height: 600px;
+  position: absolute;
+  left: 120px;
+  top: 150px;
+}
+
+.products-container {
+  margin-left: 320px;
+  display: grid;
+  grid-template-columns: 250px 250px 250px 250px 250px;
+  column-gap: 1px;
+  row-gap: 20px;
+  justify-content: center;
+  margin-top: 150px;
+  margin-bottom: 150px;
+  position: relative;
+}
+
+.product {
+  border: 1px solid rgb(231, 231, 231);
+  word-break: break-all;
+  position: relative;
+  height: 400px;
+}
+
+.product:hover {
+  border-bottom: 1px solid rgb(72, 184, 221);
+  border-top: 1px solid rgb(72, 184, 221);
+  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.75);
+}
+
+.product > h1 {
+  font-size: 15px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-weight: bold;
+}
+
+.product > h2 {
+  font-size: 12px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+  color: rgb(146, 146, 146);
+  margin-bottom: 40px;
+}
+
+.product-image-container {
+  position: relative;
+  width: 100%;
+}
+
+.product-image-container > a > img {
+  width: 100%;
+  padding: 20px;
+}
+
+.product-image-container > a > img:hover {
+  padding: 0;
+  cursor: pointer;
+}
+
+.available {
+  color: white;
+  background-color: green;
+  font-size: 15px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px;
+  border-radius: 2px;
+}
+
+.unavailable {
+  color: white;
+  background-color: red;
+  font-size: 15px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px;
+  border-radius: 2px;
+}
+
+.product > p {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  color: red;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.buttons-container {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  padding-bottom: 5px;
+}
+
+.buttons-container > a {
+  margin-right: 5px;
+  font-size: 20px;
+  padding: 5px 10px 5px 10px;
+  background-color: rgb(173, 173, 173);
+  border-radius: 5px;
+}
+
+.buttons-container > a > i {
+  color: white;
+}
+
+.buttons-container > a:nth-child(1):hover > i {
+  color: green;
+}
+
+.buttons-container > a:nth-child(2):hover > i {
+  color: red;
+}
+
+/* products  */
+
+/* pagination  */
+.pagination-container {
+  position: absolute;
+  bottom: -70px;
+  left: 165px;
+  display: flex;
+}
+
+.pagination-container > a {
+  border: 1px solid rgba(211, 211, 211, 0.698);
+  padding: 7px 12px 7px 12px;
+  color: rgb(67, 179, 248);
+}
+
+.pagination-container > a:hover {
+  background-color: lightgray;
+}
+
+.results-sort-container {
+  position: absolute;
+  top: -72px;
+  right: 160px;
+  display: flex;
+}
+
+.sort-container {
+  margin-left: 10px;
+}
+
+.sort-container > label {
+  font-size: 15px;
+  color: rgb(156, 156, 156);
+}
+
+.sort-container > select {
+  border: 1px solid lightgray;
+  padding: 8px 5px 8px 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.sort-container > select:hover {
+  border: 1px solid lightskyblue;
+}
+
+.results-container > label {
+  font-size: 15px;
+  color: rgb(156, 156, 156);
+}
+
+.results-container > select {
+  border: 1px solid lightgray;
+  padding: 8px 5px 8px 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.results-container > select:hover {
+  border: 1px solid lightskyblue;
+}
+
+.currentPage {
+  background-color: lightgray;
+}
+
+/* pagination  */
+
 /* footer  */
 .quick-links {
   display: flex;
