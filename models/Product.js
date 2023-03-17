@@ -33,6 +33,10 @@ const productSchema = new Schema({
     type: Number,
     required: true,
   },
+  available: {
+    type: Boolean,
+    required: true,
+  },
   favourites: {
     type: [ObjectId],
     ref: "User",

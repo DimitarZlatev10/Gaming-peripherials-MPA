@@ -2,6 +2,8 @@ const {
   getProductById,
   addComment,
   deleteComment,
+  pagination,
+  getAllPosts,
 } = require("../services/product");
 const { mapErrors } = require("../utils/errorDisplayer");
 const {
@@ -80,5 +82,58 @@ router.get(
     }
   }
 );
+
+router.get("/products", async (req, res) => {
+  const page = req.query.page || 1;
+  const productsPerPage = req.query.productsPerPage || 5;
+  const products = await pagination(page - 1, productsPerPage);
+
+  const totalProducts = await getAllPosts();
+  const totalPages = Math.ceil(totalProducts.length / productsPerPage);
+  let pageIndex = [];
+
+  for (let i = 1; i <= totalPages; i++) {
+    if (page == i) {
+      pageIndex.push({
+        page: i,
+        productsPerPage: productsPerPage,
+        currentPage: true,
+      });
+    } else {
+      pageIndex.push({
+        page: i,
+        productsPerPage: productsPerPage,
+        currentPage: false,
+      });
+    }
+  }
+
+  let selectedProductsPerPage = {
+    selectedFive: false,
+    selectedTen: false,
+    selectedFifteen: false,
+  };
+
+  if (productsPerPage == 5) {
+    selectedProductsPerPage.selectedFive = true;
+  } else if (productsPerPage == 10) {
+    selectedProductsPerPage.selectedTen = true;
+  } else if (productsPerPage == 15) {
+    selectedProductsPerPage.selectedFifteen = true;
+  }
+
+  console.log(page);
+  console.log(productsPerPage);
+  console.log(pageIndex);
+
+  res.render("products", {
+    title: "Products Page",
+    products,
+    pageIndex,
+    productsPerPage,
+    page,
+    selectedProductsPerPage,
+  });
+});
 
 module.exports = router;
