@@ -4,6 +4,10 @@ async function getAllPosts() {
   return Product.find({}).lean();
 }
 
+async function getFiveProducts() {
+  return Product.find({}).limit(5).lean();
+}
+
 async function getProductById(productId) {
   return Product.findById(productId).lean();
 }
@@ -27,9 +31,20 @@ async function deleteComment(productId, commentId) {
   await product.save();
 }
 
+async function pagination(page, productsPerPage) {
+  const allProducts = await Product.find()
+    .skip(page * productsPerPage)
+    .limit(productsPerPage)
+    .lean();
+
+  return allProducts;
+}
+
 module.exports = {
   getAllPosts,
   getProductById,
   addComment,
   deleteComment,
+  pagination,
+  getFiveProducts,
 };
