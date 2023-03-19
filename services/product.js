@@ -43,26 +43,32 @@ async function deleteComment(productId, commentId) {
   await product.save();
 }
 
-async function pagination(page, productsPerPage) {
-  return Product.find()
+async function pagination(page, productsPerPage, type) {
+  return Product.find({ type: type })
     .skip(page * productsPerPage)
     .limit(productsPerPage)
     .lean();
 }
 
-async function paginateByPrice(page, productsPerPage, from, to) {
+async function paginateByPrice(page, productsPerPage, from, to, type) {
   return Product.find({
     price: { $gte: from, $lte: to },
+    type: type,
   })
     .skip(page * productsPerPage)
     .limit(productsPerPage)
     .lean();
 }
 
-async function getAllProductsByPrice(from, to) {
+async function getAllProductsByPrice(from, to, type) {
   return Product.find({
     price: { $gte: from, $lte: to },
+    type: type,
   }).lean();
+}
+
+async function getAllProductsByType(type) {
+  return Product.find({ type: type }).lean();
 }
 
 module.exports = {
@@ -74,4 +80,5 @@ module.exports = {
   getFiveProducts,
   paginateByPrice,
   getAllProductsByPrice,
+  getAllProductsByType,
 };
