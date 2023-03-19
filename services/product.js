@@ -13,10 +13,22 @@ async function getProductById(productId) {
 }
 
 async function addComment(productId, comment) {
-  const existingProduct = await Product.findById(productId);
-
-  existingProduct.comments.push(comment);
-  await existingProduct.save();
+  await Product.updateOne(
+    { _id: productId },
+    {
+      $push: {
+        comments: {
+          _id: comment._id,
+          username: comment.username,
+          rating: comment.rating,
+          comment: comment.comment,
+          owner: comment.owner,
+          productId: productId,
+          userImage: comment.userImage,
+        },
+      },
+    }
+  );
 }
 
 async function deleteComment(productId, commentId) {
@@ -32,12 +44,25 @@ async function deleteComment(productId, commentId) {
 }
 
 async function pagination(page, productsPerPage) {
-  const allProducts = await Product.find()
+  return Product.find()
     .skip(page * productsPerPage)
     .limit(productsPerPage)
     .lean();
+}
 
-  return allProducts;
+async function paginateByPrice(page, productsPerPage, from, to) {
+  return Product.find({
+    price: { $gte: from, $lte: to },
+  })
+    .skip(page * productsPerPage)
+    .limit(productsPerPage)
+    .lean();
+}
+
+async function getAllProductsByPrice(from, to) {
+  return Product.find({
+    price: { $gte: from, $lte: to },
+  }).lean();
 }
 
 module.exports = {
@@ -47,4 +72,6 @@ module.exports = {
   deleteComment,
   pagination,
   getFiveProducts,
+  paginateByPrice,
+  getAllProductsByPrice,
 };
