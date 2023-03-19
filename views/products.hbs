@@ -1,40 +1,102 @@
-{{!-- <div class="results-sort-container">
-  <div class="results-container">
-    <label for="results">Results:</label>
-    <select name="results" id="results" onchange="location = this.value">
-      <option value="/products?page={{page}}&productsPerPage=5">5</option>
-      <option
-        selected="true"
-        value="/products?page={{page}}&productsPerPage=10"
-      >10</option>
-      <option value="/products?page={{page}}&productsPerPage=15">15</option>
-    </select>
-  </div>
-  <div class="sort-container">
-    <label for="sort">Sort by:</label>
-    <select name="sort" id="sort">
-      <option value="lowest">Lowest price</option>
-      <option value="highest">Highest price</option>
-    </select>
-  </div>
-</div> --}}
+<div class="product-type-header">
+  <h1>Headsets</h1>
+</div>
 
- <div class="product-types-navigation">
-  <div class="products-links">
-    <a href="#">Smartphones</a>
-    <a href="#">Smartwatches</a>
-    <a href="#">Headphones</a>
+<div class="products-filters">
+  <div class="products-header">
+    <h1>FILTER</h1>
+    <p>296 products</p>
   </div>
-</div> 
+
+  <div class="basic-filters">
+    <div class="basic-filter">
+      <input type="checkbox" onchange="location = this.value" name="newest" value="/newest" />
+      <label for="newest">Newest</label>
+    </div>
+    <div class="basic-filter">
+      <input type="checkbox" onchange="location = this.value" name="promotion" value="/promotion" />
+      <label for="promotion">Promotion</label>
+    </div>
+    <div class="basic-filter">
+      <input type="checkbox" onchange="location = this.value" name="available" value="/available" />
+      <label for="available">Available</label>
+    </div>
+  </div>
+  <div class="products-brand-container">
+    <p>Brand</p>
+    <div class="brand">
+      <input type="checkbox" onchange="location  = this.value" name="asus" value="/asus" />
+      <label for="asus">Asus</label>
+    </div>
+    <div class="brand">
+      <input type="checkbox" onchange="location  = this.value" name="razor" value="/razor" />
+      <label for="razor">Razor</label>
+    </div>
+    <div class="brand">
+      <input type="checkbox" onchange="location  = this.value" name="bloody" value="/bloody" />
+      <label for="bloody">Bloody</label>
+    </div>
+    <div class="brand">
+      <input type="checkbox" onchange="location  = this.value" name="logitech" value="/logitech" />
+      <label for="bloody">Logitech</label>
+    </div>
+  </div>
+  <div class="price-filter-container">
+    <p>Price</p>
+    <div class="price-filter">
+      <input type="checkbox" {{#if selectedPriceFilter.priceFilterOne}} checked="true" {{/if}} {{#if
+        selectedPriceFilter.priceFilterOne}} value="/products?page=1&productsPerPage={{productsPerPage}}" {{else}}
+        value="/products?page=1&productsPerPage={{productsPerPage}}&priceRange=10/40" {{/if}}
+        value="/products?page=1&productsPerPage={{productsPerPage}}&priceRange=10/40" name="10/40"
+        onchange="location = this.value" />
+      <label for="10/40">10.00$ - 40.00$</label>
+    </div>
+    <div class="price-filter">
+      <input type="checkbox" {{#if selectedPriceFilter.priceFilterTwo}} checked="true" {{/if}} {{#if
+        selectedPriceFilter.priceFilterTwo}} value="/products?page=1&productsPerPage={{productsPerPage}}" {{else}}
+        value="/products?page=1&productsPerPage={{productsPerPage}}&priceRange=40/80" {{/if}}
+        value="/products?page=1&productsPerPage={{productsPerPage}}&priceRange=40/80" name="40/80"
+        onchange="location = this.value" />
+      <label for="40/80">40.00$ - 80.00$</label>
+    </div>
+    <div class="price-filter">
+      <input type="checkbox" {{#if selectedPriceFilter.priceFilterThree}} checked="true" {{/if}} {{#if
+        selectedPriceFilter.priceFilterThree}} value="/products?page=1&productsPerPage={{productsPerPage}}" {{else}}
+        value="/products?page=1&productsPerPage={{productsPerPage}}&priceRange=80/140" {{/if}}
+        value="/products?page=1&productsPerPage={{productsPerPage}}&priceRange=80/140" name="80/140"
+        onchange="location = this.value" />
+      <label for="80/140">80.00$ - 140.00$</label>
+    </div>
+    <div class="price-filter">
+      <input type="checkbox" {{#if selectedPriceFilter.priceFilterFour}} checked="true" {{/if}} {{#if
+        selectedPriceFilter.priceFilterFour}} value="/products?page=1&productsPerPage={{productsPerPage}}" {{else}}
+        value="/products?page=1&productsPerPage={{productsPerPage}}&priceRange=140/200" {{/if}}
+        value="/products?page=1&productsPerPage={{productsPerPage}}&priceRange=140/200" name="140/200"
+        onchange="location = this.value" />
+      <label for="140/200">140.00$ - 200.00$</label>
+    </div>
+    <div class="price-filter">
+      <input type="checkbox" {{#if selectedPriceFilter.priceFilterFive}} checked="true" {{/if}} {{#if
+        selectedPriceFilter.priceFilterFive}} value="/products?page=1&productsPerPage={{productsPerPage}}" {{else}}
+        value="/products?page=1&productsPerPage={{productsPerPage}}&priceRange=200/400" {{/if}}
+        value="/products?page=1&productsPerPage={{productsPerPage}}&priceRange=200/400" name="200/400"
+        onchange="location = this.value" />
+      <label for="200/400">200.00$ - 400.00$</label>
+    </div>
+  </div>
+</div>
 
 <div class="products-container">
   <div class="results-sort-container">
     <div class="results-container">
       <label for="results">Results:</label>
       <select name="results" id="results" onchange="location = this.value">
-        <option {{#if selectedProductsPerPage.selectedFive}} selected="true" {{/if}}  value="/products?page={{page}}&productsPerPage=5">5</option>
-        <option {{#if selectedProductsPerPage.selectedTen}} selected="true" {{/if}} value="/products?page={{page}}&productsPerPage=10">10</option>
-        <option {{#if selectedProductsPerPage.selectedFifteen}} selected="true" {{/if}} value="/products?page={{page}}&productsPerPage=15">15</option>
+        <option {{#if selectedProductsPerPage.selectedFive}} selected="true" {{/if}}
+          value="/products?page=1&productsPerPage=5{{#if priceRange}}&priceRange={{priceRange}}{{/if}}">5</option>
+        <option {{#if selectedProductsPerPage.selectedTen}} selected="true" {{/if}}
+          value="/products?page=1&productsPerPage=10{{#if priceRange}}&priceRange={{priceRange}}{{/if}}">10</option>
+        <option {{#if selectedProductsPerPage.selectedFifteen}} selected="true" {{/if}}
+          value="/products?page=1&productsPerPage=15{{#if priceRange}}&priceRange={{priceRange}}{{/if}}">15</option>
       </select>
     </div>
     <div class="sort-container">
@@ -46,41 +108,43 @@
     </div>
   </div>
 
-  {{! product  }}
+  {{! product }}
 
+  {{#if products}}
   {{#each products}}
-    <div class="product">
-      <div class="product-image-container">
-        {{#if available}}
-        <i class="fas fa-check available"></i>
-        {{else}}
-        <i class="fas fa-ban unavailable"></i>
-        {{/if}}
-        <a href="/details/{{_id}}"><img src="{{image}}" alt="" /> </a>
-      </div>
-      <h1>
-        {{title}}
-      </h1>
-      <h2>
-        {{shortDescription}}
-      </h2>
-      <p>{{price}}.00$</p>
-      <div class="buttons-container">
-        <a href="#"> <i class="fas fa-shopping-cart"></i></a>
-        <a href="#"> <i class="fas fa-heart"></i></a>
-      </div>
+  <div class="product">
+    <div class="product-image-container">
+      {{#if available}}
+      <i class="fas fa-check available"></i>
+      {{else}}
+      <i class="fas fa-ban unavailable"></i>
+      {{/if}}
+      <a href="/details/{{_id}}"><img src="{{image}}" alt="" /> </a>
     </div>
+    <h1>
+      {{title}}
+    </h1>
+    <h2>
+      {{shortDescription}}
+    </h2>
+    <p>{{price}}.00$</p>
+    <div class="buttons-container">
+      <a href="#"> <i class="fas fa-shopping-cart"></i></a>
+      <a href="#"> <i class="fas fa-heart"></i></a>
+    </div>
+  </div>
 
   {{/each}}
-
-  {{! product  }}
+  {{else}}
+  <p>no products found</p>
+  {{/if}}
+  {{! product }}
 
   <div class="pagination-container">
     {{#each pageIndex}}
 
-      <a
-        href="/products?page={{page}}&productsPerPage={{productsPerPage}}" {{#if currentPage}} class="currentPage" {{/if}}
-      >{{page}}</a>
+    <a href="/products?page={{page}}&productsPerPage={{productsPerPage}}{{#if priceRange}}&priceRange={{priceRange}}{{/if}}"
+      {{#if currentPage}} class="currentPage" {{/if}}>{{page}}</a>
 
     {{/each}}
   </div>

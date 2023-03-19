@@ -673,15 +673,82 @@ input[name="comment"]::placeholder {
 
 /* products  */
 
-.product-types-navigation {
-  background-color: red;
-  color: black;
-  width: 300px;
-  height: 600px;
+/* filters  */
+
+.product-type-header {
+  position: relative;
+  top: 60px;
+  left: 490px;
+  width: 600px;
+}
+
+.products-filters {
+  width: 250px;
   position: absolute;
-  left: 120px;
+  left: 200px;
   top: 150px;
 }
+
+.products-header {
+  position: relative;
+  top: -40px;
+  left: 0px;
+}
+
+.products-header > h1 {
+  font-size: 40px;
+  font-weight: 300;
+}
+
+.products-header > p {
+  font-size: 15px;
+  margin-top: 10px;
+  color: rgb(114, 114, 114);
+}
+
+.basic-filters {
+  background-color: #fbfbfb;
+  padding: 10px;
+  border-radius: 2px;
+}
+
+.products-brand-container {
+  background-color: #fbfbfb;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 10px;
+  border-radius: 2px;
+}
+
+.products-brand-container > p {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.brand,
+.basic-filter,
+.price-filter {
+  margin-top: 3px;
+}
+
+.brand > label,
+.basic-filter > label,
+.price-filter > label {
+  margin-left: 5px;
+}
+
+.price-filter-container {
+  background-color: #fbfbfb;
+  padding: 10px;
+  border-radius: 2px;
+}
+
+.price-filter-container > p {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+/* filters  */
 
 .products-container {
   margin-left: 320px;
@@ -730,7 +797,8 @@ input[name="comment"]::placeholder {
 }
 
 .product-image-container > a > img {
-  width: 100%;
+  width: 248px;
+  height: 248px;
   padding: 20px;
 }
 
