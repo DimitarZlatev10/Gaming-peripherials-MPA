@@ -868,6 +868,27 @@ input[name="comment"]::placeholder {
   color: red;
 }
 
+.no-results-found {
+  width: 600px;
+  height: 400px;
+}
+
+.no-results-found > p {
+  margin-bottom: 20px;
+  font-size: 25px;
+}
+
+.no-results-found > a {
+  background-color: lightskyblue;
+  padding: 10px;
+  color: white;
+  border-radius: 5px;
+}
+
+.no-results-found > a:hover {
+  opacity: 0.7;
+}
+
 /* products  */
 
 /* pagination  */
