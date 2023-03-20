@@ -1,6 +1,31 @@
 <div class="product-type-header">
-  <h1>{{type}}</h1>
+  <h1>{{type}}s</h1>
 </div>
+
+
+{{#if activeFilters}}
+<div class="active-filters">
+  {{#if brand}}
+  <div class="active-filter">
+    <p>{{brand}}</p>
+    <a href="/products/{{type}}?page=1&productsPerPage={{productsPerPage}}{{#if priceRange}}&priceRange={{priceRange}}{{/if}}{{#if sort}}&sort={{sort}}{{/if}}"
+      class="fas fa-close"></a>
+  </div>
+  {{/if}}
+  {{#if priceRange}}
+  <div class="active-filter">
+    <p>{{priceRange}}</p>
+    <a href="/products/{{type}}?page=1&productsPerPage={{productsPerPage}}{{#if brand}}&brand={{brand}}{{/if}}{{#if sort}}&sort={{sort}}{{/if}}"
+      class="fas fa-close"></a>
+  </div>
+  {{/if}}
+  <div class="clear-all-filters">
+    <p>clear all</p>
+    <a href="/products/{{type}}?page=1&productsPerPage={{productsPerPage}}" class="fas fa-close"></a>
+  </div>
+</div>
+{{/if}}
+
 
 <div class="products-filters">
   <div class="products-header">

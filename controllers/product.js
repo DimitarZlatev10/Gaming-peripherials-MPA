@@ -251,10 +251,16 @@ router.get("/products/:type", async (req, res) => {
     }
   }
 
+  let activeFilters;
+
+  if (priceRange || brand) {
+    activeFilters = true;
+  }
+
   // console.log(pageIndex);
 
   res.render("products", {
-    title: "Products Page",
+    title: `${type}s page`,
     products,
     pageIndex,
     productsPerPage,
@@ -268,6 +274,7 @@ router.get("/products/:type", async (req, res) => {
     selectedBrandFilter,
     sort,
     selectedSortFilter,
+    activeFilters,
   });
 });
 
