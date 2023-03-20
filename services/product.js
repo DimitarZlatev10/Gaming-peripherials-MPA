@@ -1,7 +1,7 @@
 const Product = require("../models/Product");
 
-async function getAllPosts() {
-  return Product.find({}).lean();
+async function getAllProducts(type) {
+  return Product.find({ type: type }).lean();
 }
 
 async function getFiveProducts() {
@@ -201,7 +201,7 @@ async function getAllProductsByBrandAndPrice(type, brand, from, to) {
 }
 
 module.exports = {
-  getAllPosts,
+  getAllProducts,
   getProductById,
   addComment,
   deleteComment,

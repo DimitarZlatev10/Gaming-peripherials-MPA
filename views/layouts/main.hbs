@@ -1,128 +1,123 @@
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
-    />
-    <link rel="stylesheet" href="/static/styles.css" />
 
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
+  <link rel="stylesheet" href="/static/styles.css" />
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"
-    ></script>
-    <title>{{title}}</title>
-  </head>
-  <body>
-    <!-- header  -->
-    <header class="header">
-      <a href="/" class="logo"><i class="fas fa-kiwi-bird"></i>Kiwie
-      </a>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
 
-      <form action="" class="search-form">
-        <input type="search" id="form-input" placeholder="Search..." />
-        <label for="form-input" class="fas fa-search"></label>
-      </form>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+  <title>{{title}}</title>
+</head>
 
-      <div class="icons">
-        <div id="menu-btn" class="fas fa-bars"></div>
-        <div id="search-btn" class="fas fa-search"></div>
-        <a href="#" class="fas fa-user"></a>
-        <a href="#" class="fas fa-heart"></a>
-        <a href="#" class="fas fa-shopping-cart"></a>
-      </div>
-    </header>
+<body>
+  <!-- header  -->
+  <header class="header">
+    <a href="/" class="logo"><i class="fas fa-kiwi-bird"></i>Kiwie
+    </a>
 
-    <!-- header  -->
+    <form action="" class="search-form">
+      <input type="search" id="form-input" placeholder="Search..." />
+      <label for="form-input" class="fas fa-search"></label>
+    </form>
 
-    {{! errors }}
-    {{#if errors}}
-      <div class="errorContainer">
-        {{#each errors}}
-          <div class="error-message">
-            <p>{{msg}}</p>
-            <div>X</div>
-          </div>
-        {{/each}}
-      </div>
-    {{/if}}
-    {{! errors }}
-
-    <!-- side-bar  -->
-    <div class="side-bar">
-      <div id="close-side-bar" class="fas fa-times"></div>
-
-      {{#if hasUser}}
-        <div class="user">
-          <img src="{{user.image}}" />
-          <h3>{{user.firstName}} {{user.lastName}}</h3>
-          <a href="/logout">Log out</a>
-        </div>
-      {{/if}}
-
-      <nav class="navbar">
-        <a href="/"> <i class="fas fa-angle-right"></i>home</a>
-        <a href="#"> <i class="fas fa-angle-right"></i>about</a>
-        <a href="/products"> <i class="fas fa-angle-right"></i>products</a>
-        <a href="#"> <i class="fas fa-angle-right"></i>contact</a>
-        {{#if hasUser}}
-          <a href="#">
-            <i class="fas fa-angle-right"></i>{{user.firstName}}'s cart</a>
-        {{else}}
-          <a href="/login"> <i class="fas fa-angle-right"></i>login</a>
-          <a href="/register"> <i class="fas fa-angle-right"></i>register</a>
-        {{/if}}
-      </nav>
+    <div class="icons">
+      <div id="menu-btn" class="fas fa-bars"></div>
+      <div id="search-btn" class="fas fa-search"></div>
+      <a href="#" class="fas fa-user"></a>
+      <a href="#" class="fas fa-heart"></a>
+      <a href="#" class="fas fa-shopping-cart"></a>
     </div>
-    <!-- side-bar  -->
+  </header>
 
-    <!-- home  -->
+  <!-- header  -->
 
-    {{{body}}}
+  {{! errors }}
+  {{#if errors}}
+  <div class="errorContainer">
+    {{#each errors}}
+    <div class="error-message">
+      <p>{{msg}}</p>
+      <div>X</div>
+    </div>
+    {{/each}}
+  </div>
+  {{/if}}
+  {{! errors }}
 
-    <!-- home  -->
+  <!-- side-bar  -->
+  <div class="side-bar">
+    <div id="close-side-bar" class="fas fa-times"></div>
 
-    <!-- footer  -->
+    {{#if hasUser}}
+    <div class="user">
+      <img src="{{user.image}}" />
+      <h3>{{user.firstName}} {{user.lastName}}</h3>
+      <a href="/logout">Log out</a>
+    </div>
+    {{/if}}
 
-    <section class="quick-links">
-      <a href="/" class="logo"><i class="fas fa-kiwi-bird"></i>Kiwie
-      </a>
+    <nav class="navbar">
+      <a href="/"> <i class="fas fa-angle-right"></i>home</a>
+      <a href="#"> <i class="fas fa-angle-right"></i>about</a>
+      <a href="/products-category"> <i class="fas fa-angle-right"></i>products</a>
+      <a href="#"> <i class="fas fa-angle-right"></i>contact</a>
+      {{#if hasUser}}
+      <a href="#">
+        <i class="fas fa-angle-right"></i>{{user.firstName}}'s cart</a>
+      {{else}}
+      <a href="/login"> <i class="fas fa-angle-right"></i>login</a>
+      <a href="/register"> <i class="fas fa-angle-right"></i>register</a>
+      {{/if}}
+    </nav>
+  </div>
+  <!-- side-bar  -->
 
-      <div class="links">
-        <a href="#">home</a>
-        <a href="#">about</a>
-        <a href="/products">products</a>
-        <a href="#">contact</a>
-        {{#if hasUser}}
-          {{!-- <a href="#">{{user.firstName}}'s cart</a> --}}
-        {{else}}
-          <a href="/login">login</a>
-          <a href="/register">register</a>
-        {{/if}}
-      </div>
+  <!-- home  -->
 
-      <div class="share">
-        <a href="#" class="fab fa-facebook"></a>
-        <a href="#" class="fab fa-twitter"></a>
-        <a href="#" class="fab fa-instagram"></a>
-        <a href="#" class="fab fa-linkedin"></a>
-      </div>
-    </section>
+  {{{body}}}
 
-    <section class="credit">
-      <p>created by <span>Kirila Ilieva</span> | all rights reserved!</p>
-      <img src="/static/images/card_img.png" alt="" />
-    </section>
-    <!-- footer  -->
+  <!-- home  -->
 
-    <!-- js -->
-    <script src="/static/scripts/swiper.js"></script>
-    <script src="/static/scripts//menu.js"></script>
-  </body>
+  <!-- footer  -->
+
+  <section class="quick-links">
+    <a href="/" class="logo"><i class="fas fa-kiwi-bird"></i>Kiwie
+    </a>
+
+    <div class="links">
+      <a href="#">home</a>
+      <a href="#">about</a>
+      <a href="/products-category">products</a>
+      <a href="#">contact</a>
+      {{#if hasUser}}
+      {{!-- <a href="#">{{user.firstName}}'s cart</a> --}}
+      {{else}}
+      <a href="/login">login</a>
+      <a href="/register">register</a>
+      {{/if}}
+    </div>
+
+    <div class="share">
+      <a href="#" class="fab fa-facebook"></a>
+      <a href="#" class="fab fa-twitter"></a>
+      <a href="#" class="fab fa-instagram"></a>
+      <a href="#" class="fab fa-linkedin"></a>
+    </div>
+  </section>
+
+  <section class="credit">
+    <p>created by <span>Kirila Ilieva</span> | all rights reserved!</p>
+    <img src="/static/images/card_img.png" alt="" />
+  </section>
+  <!-- footer  -->
+
+  <!-- js -->
+  <script src="/static/scripts/swiper.js"></script>
+  <script src="/static/scripts//menu.js"></script>
+</body>
+
 </html>

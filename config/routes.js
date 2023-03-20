@@ -7,7 +7,7 @@ module.exports = (app) => {
   app.use(homeController);
   app.use(productController);
 
-  //   app.get("*", (req, res) => {
-  //     res.render("404", { title: "404 Page" });
-  //   });
+  app.get("*", (req, res) => {
+    res.render("404", { title: "404 Page" });
+  });
 };

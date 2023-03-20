@@ -671,6 +671,72 @@ input[name="comment"]::placeholder {
 
 /* home  */
 
+/* products-category  */
+.category-header {
+  top: 120px;
+  left: 180px;
+  position: absolute;
+  display: flex;
+  align-items: center;
+}
+
+.category-header > h1 {
+  font-size: 35px;
+  font-weight: 300;
+  margin-right: 10px;
+}
+
+.category-header > i {
+  font-size: 25px;
+}
+
+.category-container {
+  display: grid;
+  grid-template-columns: 270px 270px 270px;
+  margin-left: 180px;
+  margin-top: 100px;
+  margin-bottom: 30px;
+}
+
+.category {
+  border: 0.1px solid lightgray;
+}
+
+.category-img {
+  width: 270px;
+}
+
+.category-img > a > img {
+  width: 268px;
+  height: 268px;
+  padding: 20px;
+  cursor: pointer;
+}
+
+.category-img > a > img:hover {
+  padding: 0;
+}
+
+.category-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 15px;
+  padding-bottom: 10px;
+}
+
+.category-title > h1 {
+  font-size: 22px;
+  font-weight: 400;
+  padding-bottom: 5px;
+}
+
+.category-title > p {
+  font-size: 12px;
+  color: rgb(180, 180, 180);
+}
+/* products-category  */
+
 /* products  */
 
 /* filters  */
@@ -1185,6 +1251,12 @@ input[name="comment"]::placeholder {
     position: absolute;
     left: 100px;
     top: 150px;
+  }
+
+  .content {
+    position: absolute;
+    right: 15%;
+    top: 200px;
   }
 }
 
