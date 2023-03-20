@@ -43,18 +43,58 @@ async function deleteComment(productId, commentId) {
   await product.save();
 }
 
-async function pagination(page, productsPerPage, type) {
+async function pagination(page, productsPerPage, type, sort) {
+  if (sort) {
+    if (sort == "price_lowest") {
+      return Product.find({ type: type })
+        .sort({ price: 1 })
+        .skip(page * productsPerPage)
+        .limit(productsPerPage)
+        .lean();
+    } else if (sort == "price_highest") {
+      return Product.find({ type: type })
+        .sort({ price: -1 })
+        .skip(page * productsPerPage)
+        .limit(productsPerPage)
+        .lean();
+    }
+  }
+
   return Product.find({ type: type })
+    .sort({ price: 1 })
     .skip(page * productsPerPage)
     .limit(productsPerPage)
     .lean();
 }
 
-async function paginateByPrice(page, productsPerPage, from, to, type) {
+async function paginateByPrice(page, productsPerPage, from, to, type, sort) {
+  if (sort) {
+    if (sort == "price_lowest") {
+      return Product.find({
+        price: { $gte: from, $lte: to },
+        type: type,
+      })
+        .sort({ price: 1 })
+        .skip(page * productsPerPage)
+        .limit(productsPerPage)
+        .lean();
+    } else if (sort == "price_highest") {
+      return Product.find({
+        price: { $gte: from, $lte: to },
+        type: type,
+      })
+        .sort({ price: -1 })
+        .skip(page * productsPerPage)
+        .limit(productsPerPage)
+        .lean();
+    }
+  }
+
   return Product.find({
     price: { $gte: from, $lte: to },
     type: type,
   })
+    .sort({ price: 1 })
     .skip(page * productsPerPage)
     .limit(productsPerPage)
     .lean();
@@ -71,6 +111,95 @@ async function getAllProductsByType(type) {
   return Product.find({ type: type }).lean();
 }
 
+async function paginateByBrand(page, productsPerPage, type, brand, sort) {
+  if (sort) {
+    if (sort == "price_lowest") {
+      return Product.find({
+        brand: brand,
+        type: type,
+      })
+        .sort({ price: 1 })
+        .skip(page * productsPerPage)
+        .limit(productsPerPage)
+        .lean();
+    } else if (sort == "price_highest") {
+      return Product.find({
+        brand: brand,
+        type: type,
+      })
+        .sort({ price: -1 })
+        .skip(page * productsPerPage)
+        .limit(productsPerPage)
+        .lean();
+    }
+  }
+
+  return Product.find({
+    brand: brand,
+    type: type,
+  })
+    .sort({ price: 1 })
+    .skip(page * productsPerPage)
+    .limit(productsPerPage)
+    .lean();
+}
+
+async function getAllProductsByBrand(brand) {
+  return Product.find({ brand: brand }).lean();
+}
+
+async function paginateByBrandAndPrice(
+  page,
+  productsPerPage,
+  type,
+  brand,
+  from,
+  to,
+  sort
+) {
+  if (sort) {
+    if (sort == "price_lowest") {
+      return Product.find({
+        type: type,
+        brand: brand,
+        price: { $gte: from, $lte: to },
+      })
+        .sort({ price: 1 })
+        .skip(page * productsPerPage)
+        .limit(productsPerPage)
+        .lean();
+    } else if (sort == "price_highest") {
+      return Product.find({
+        type: type,
+        brand: brand,
+        price: { $gte: from, $lte: to },
+      })
+        .sort({ price: -1 })
+        .skip(page * productsPerPage)
+        .limit(productsPerPage)
+        .lean();
+    }
+  }
+
+  return Product.find({
+    type: type,
+    brand: brand,
+    price: { $gte: from, $lte: to },
+  })
+    .sort({ price: 1 })
+    .skip(page * productsPerPage)
+    .limit(productsPerPage)
+    .lean();
+}
+
+async function getAllProductsByBrandAndPrice(type, brand, from, to) {
+  return Product.find({
+    type: type,
+    brand: brand,
+    price: { $gte: from, $lte: to },
+  });
+}
+
 module.exports = {
   getAllPosts,
   getProductById,
@@ -81,4 +210,8 @@ module.exports = {
   paginateByPrice,
   getAllProductsByPrice,
   getAllProductsByType,
+  paginateByBrand,
+  getAllProductsByBrand,
+  paginateByBrandAndPrice,
+  getAllProductsByBrandAndPrice,
 };

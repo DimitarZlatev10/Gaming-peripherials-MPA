@@ -7,6 +7,10 @@ const {
   paginateByPrice,
   getAllProductsByPrice,
   getAllProductsByType,
+  paginateByBrand,
+  getAllProductsByBrand,
+  getAllProductsByBrandAndPrice,
+  paginateByBrandAndPrice,
 } = require("../services/product");
 const { mapErrors } = require("../utils/errorDisplayer");
 const {
@@ -91,9 +95,66 @@ router.get("/products/:type", async (req, res) => {
   let page = req.query.page || 1;
   let productsPerPage = Number(req.query.productsPerPage) || 5;
   let priceRange = req.query.priceRange;
+  let brand = req.query.brand;
+  let sort = req.query.sort;
 
   if (type != "mouse" && type != "keyboard" && type != "headphones") {
     res.redirect("/products");
+  }
+
+  let selectedBrandFilter;
+
+  if (brand) {
+    if (
+      brand != "asus" &&
+      brand != "razor" &&
+      brand != "bloody" &&
+      brand != "logitec"
+    ) {
+      res.redirect("/products/" + type);
+    }
+
+    selectedBrandFilter = {
+      asus: brand == "asus",
+      razor: brand == "razor",
+      bloody: brand == "bloody",
+      logitec: brand == "logitec",
+    };
+  }
+
+  let selectedPriceFilter;
+
+  if (priceRange) {
+    if (
+      priceRange != "10/40" &&
+      priceRange != "40/80" &&
+      priceRange != "80/140" &&
+      priceRange != "140/200" &&
+      priceRange != "200/400"
+    ) {
+      priceRange = "10/40";
+    }
+
+    selectedPriceFilter = {
+      priceFilterOne: priceRange == "10/40",
+      priceFilterTwo: priceRange == "40/80",
+      priceFilterThree: priceRange == "80/140",
+      priceFilterFour: priceRange == "140/200",
+      priceFilterFive: priceRange == "200/400",
+    };
+  }
+
+  let selectedSortFilter;
+
+  if (sort) {
+    if (sort != "price_lowest" && sort != "price_highest") {
+      sort = "price_lowest";
+    }
+
+    selectedSortFilter = {
+      sortLowestPrice: sort == "price_lowest",
+      sortHighestPrice: sort == "price_highest",
+    };
   }
 
   if (page < 1) {
@@ -118,35 +179,47 @@ router.get("/products/:type", async (req, res) => {
   };
 
   let products;
+  let totalProducts;
 
-  let selectedPriceFilter;
-
-  if (priceRange) {
-    if (
-      priceRange != "10/40" &&
-      priceRange != "40/80" &&
-      priceRange != "80/140" &&
-      priceRange != "140/200" &&
-      priceRange != "200/400"
-    ) {
-      priceRange = "10/40";
-    }
-
-    selectedPriceFilter = {
-      priceFilterOne: priceRange == "10/40",
-      priceFilterTwo: priceRange == "40/80",
-      priceFilterThree: priceRange == "80/140",
-      priceFilterFour: priceRange == "140/200",
-      priceFilterFive: priceRange == "200/400",
-    };
-
+  if (brand && priceRange) {
     let from = Number(priceRange.split("/")[0]);
     let to = Number(priceRange.split("/")[1]);
 
-    products = await paginateByPrice(page - 1, productsPerPage, from, to, type);
+    products = await paginateByBrandAndPrice(
+      page - 1,
+      productsPerPage,
+      type,
+      brand,
+      from,
+      to,
+      sort
+    );
+    totalProducts = (await getAllProductsByBrandAndPrice(type, brand, from, to))
+      .length;
+  } else if (brand) {
+    products = await paginateByBrand(
+      page - 1,
+      productsPerPage,
+      type,
+      brand,
+      sort
+    );
+    totalProducts = (await getAllProductsByBrand(brand)).length;
+  } else if (priceRange) {
+    let from = Number(priceRange.split("/")[0]);
+    let to = Number(priceRange.split("/")[1]);
+
+    products = await paginateByPrice(
+      page - 1,
+      productsPerPage,
+      from,
+      to,
+      type,
+      sort
+    );
     totalProducts = (await getAllProductsByPrice(from, to, type)).length;
   } else {
-    products = await pagination(page - 1, productsPerPage, type);
+    products = await pagination(page - 1, productsPerPage, type, sort);
     totalProducts = (await getAllProductsByType(type)).length;
   }
 
@@ -162,6 +235,8 @@ router.get("/products/:type", async (req, res) => {
         currentPage: true,
         priceRange: priceRange ? priceRange : false,
         type: type,
+        brand: brand ? brand : false,
+        sort: sort,
       });
     } else {
       pageIndex.push({
@@ -170,6 +245,8 @@ router.get("/products/:type", async (req, res) => {
         currentPage: false,
         priceRange: priceRange ? priceRange : false,
         type: type,
+        brand: brand ? brand : false,
+        sort: sort,
       });
     }
   }
@@ -187,6 +264,10 @@ router.get("/products/:type", async (req, res) => {
     selectedPriceFilter,
     type,
     totalProducts,
+    brand,
+    selectedBrandFilter,
+    sort,
+    selectedSortFilter,
   });
 });
 

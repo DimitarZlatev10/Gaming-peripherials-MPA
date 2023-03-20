@@ -10,77 +10,102 @@
 
   <div class="basic-filters">
     <div class="basic-filter">
-      <input type="checkbox" onchange="location = this.value" name="newest" value="/newest" />
+      <input type="checkbox" {{!--onchange="location = this.value" --}} name="newest" disabled />
       <label for="newest">Newest</label>
     </div>
     <div class="basic-filter">
-      <input type="checkbox" onchange="location = this.value" name="promotion" value="/promotion" />
+      <input type="checkbox" {{!--onchange="location = this.value" --}} name="promotion" disabled />
       <label for="promotion">Promotion</label>
     </div>
     <div class="basic-filter">
-      <input type="checkbox" onchange="location = this.value" name="available" value="/available" />
+      <input type="checkbox" {{!--onchange="location = this.value" --}} name="available" disabled />
       <label for="available">Available</label>
     </div>
   </div>
   <div class="products-brand-container">
     <p>Brand</p>
     <div class="brand">
-      <input type="checkbox" onchange="location  = this.value" name="asus" value="/asus" />
+      <input type="checkbox" onchange="location = this.value" {{#if selectedBrandFilter.asus}} checked="true" {{/if}}
+        {{#if selectedBrandFilter.asus}}
+        value="/products/{{type}}?page=1&productsPerPage={{productsPerPage}}{{#if priceRange}}&priceRange={{priceRange}}{{/if}}{{#if sort}}&sort={{sort}}{{/if}}"
+        {{else}}
+        value="/products/{{type}}?page=1&productsPerPage={{productsPerPage}}&brand=asus{{#if priceRange}}&priceRange={{priceRange}}{{/if}}{{#if sort}}&sort={{sort}}{{/if}}"
+        {{/if}} name="asus" />
       <label for="asus">Asus</label>
     </div>
     <div class="brand">
-      <input type="checkbox" onchange="location  = this.value" name="razor" value="/razor" />
+      <input type="checkbox" onchange="location = this.value" {{#if selectedBrandFilter.razor}} checked="true" {{/if}}
+        {{#if selectedBrandFilter.razor}}
+        value="/products/{{type}}?page=1&productsPerPage={{productsPerPage}}{{#if priceRange}}&priceRange={{priceRange}}{{/if}}{{#if sort}}&sort={{sort}}{{/if}}"
+        {{else}}
+        value="/products/{{type}}?page=1&productsPerPage={{productsPerPage}}&brand=razor{{#if priceRange}}&priceRange={{priceRange}}{{/if}}{{#if sort}}&sort={{sort}}{{/if}}"
+        {{/if}} name="razor" />
       <label for="razor">Razor</label>
     </div>
     <div class="brand">
-      <input type="checkbox" onchange="location  = this.value" name="bloody" value="/bloody" />
+      <input type="checkbox" onchange="location = this.value" {{#if selectedBrandFilter.bloody}} checked="true" {{/if}}
+        {{#if selectedBrandFilter.bloody}}
+        value="/products/{{type}}?page=1&productsPerPage={{productsPerPage}}{{#if priceRange}}&priceRange={{priceRange}}{{/if}}{{#if sort}}&sort={{sort}}{{/if}}"
+        {{else}}
+        value="/products/{{type}}?page=1&productsPerPage={{productsPerPage}}&brand=bloody{{#if priceRange}}&priceRange={{priceRange}}{{/if}}{{#if sort}}&sort={{sort}}{{/if}}"
+        {{/if}} name="bloody" />
       <label for="bloody">Bloody</label>
     </div>
     <div class="brand">
-      <input type="checkbox" onchange="location  = this.value" name="logitech" value="/logitech" />
-      <label for="bloody">Logitech</label>
+      <input type="checkbox" onchange="location = this.value" {{#if selectedBrandFilter.logitec}} checked="true" {{/if}}
+        {{#if selectedBrandFilter.logitec}}
+        value="/products/{{type}}?page=1&productsPerPage={{productsPerPage}}{{#if priceRange}}&priceRange={{priceRange}}{{/if}}{{#if sort}}&sort={{sort}}{{/if}}"
+        {{else}}
+        value="/products/{{type}}?page=1&productsPerPage={{productsPerPage}}&brand=logitec{{#if priceRange}}&priceRange={{priceRange}}{{/if}}{{#if sort}}&sort={{sort}}{{/if}}"
+        {{/if}} name="logitec" />
+      <label for="bloody">Logitec</label>
     </div>
   </div>
   <div class="price-filter-container">
     <p>Price</p>
     <div class="price-filter">
       <input type="checkbox" {{#if selectedPriceFilter.priceFilterOne}} checked="true" {{/if}} {{#if
-        selectedPriceFilter.priceFilterOne}} value="/products/{{type}}?page=1&productsPerPage={{productsPerPage}}"
-        {{else}} value="/products/{{type}}?page=1&productsPerPage={{productsPerPage}}&priceRange=10/40" {{/if}}
-        value="/products/{{type}}?page=1&productsPerPage={{productsPerPage}}&priceRange=10/40" name="10/40"
-        onchange="location = this.value" />
+        selectedPriceFilter.priceFilterOne}}
+        value="/products/{{type}}?page=1&productsPerPage={{productsPerPage}}{{#if brand}}&brand={{brand}}{{/if}}{{#if sort}}&sort={{sort}}{{/if}}"
+        {{else}}
+        value="/products/{{type}}?page=1&productsPerPage={{productsPerPage}}&priceRange=10/40{{#if brand}}&brand={{brand}}{{/if}}{{#if sort}}&sort={{sort}}{{/if}}"
+        {{/if}} name="10/40" onchange="location = this.value" />
       <label for="10/40">10.00$ - 40.00$</label>
     </div>
     <div class="price-filter">
       <input type="checkbox" {{#if selectedPriceFilter.priceFilterTwo}} checked="true" {{/if}} {{#if
-        selectedPriceFilter.priceFilterTwo}} value="/products/{{type}}?page=1&productsPerPage={{productsPerPage}}"
-        {{else}} value="/products/{{type}}?page=1&productsPerPage={{productsPerPage}}&priceRange=40/80" {{/if}}
-        value="/products/{{type}}?page=1&productsPerPage={{productsPerPage}}&priceRange=40/80" name="40/80"
-        onchange="location = this.value" />
+        selectedPriceFilter.priceFilterTwo}}
+        value="/products/{{type}}?page=1&productsPerPage={{productsPerPage}}{{#if brand}}&brand={{brand}}{{/if}}{{#if sort}}&sort={{sort}}{{/if}}"
+        {{else}}
+        value="/products/{{type}}?page=1&productsPerPage={{productsPerPage}}&priceRange=40/80{{#if brand}}&brand={{brand}}{{/if}}{{#if sort}}&sort={{sort}}{{/if}}"
+        {{/if}} name="40/80" onchange="location = this.value" />
       <label for="40/80">40.00$ - 80.00$</label>
     </div>
     <div class="price-filter">
       <input type="checkbox" {{#if selectedPriceFilter.priceFilterThree}} checked="true" {{/if}} {{#if
-        selectedPriceFilter.priceFilterThree}} value="/products/{{type}}?page=1&productsPerPage={{productsPerPage}}"
-        {{else}} value="/products/{{type}}?page=1&productsPerPage={{productsPerPage}}&priceRange=80/140" {{/if}}
-        value="/products/{{type}}?page=1&productsPerPage={{productsPerPage}}&priceRange=80/140" name="80/140"
-        onchange="location = this.value" />
+        selectedPriceFilter.priceFilterThree}}
+        value="/products/{{type}}?page=1&productsPerPage={{productsPerPage}}{{#if brand}}&brand={{brand}}{{/if}}{{#if sort}}&sort={{sort}}{{/if}}"
+        {{else}}
+        value="/products/{{type}}?page=1&productsPerPage={{productsPerPage}}&priceRange=80/140{{#if brand}}&brand={{brand}}{{/if}}{{#if sort}}&sort={{sort}}{{/if}}"
+        {{/if}} name="80/140" onchange="location = this.value" />
       <label for="80/140">80.00$ - 140.00$</label>
     </div>
     <div class="price-filter">
       <input type="checkbox" {{#if selectedPriceFilter.priceFilterFour}} checked="true" {{/if}} {{#if
-        selectedPriceFilter.priceFilterFour}} value="/products/{{type}}?page=1&productsPerPage={{productsPerPage}}"
-        {{else}} value="/products/{{type}}?page=1&productsPerPage={{productsPerPage}}&priceRange=140/200" {{/if}}
-        value="/products/{{type}}?page=1&productsPerPage={{productsPerPage}}&priceRange=140/200" name="140/200"
-        onchange="location = this.value" />
+        selectedPriceFilter.priceFilterFour}}
+        value="/products/{{type}}?page=1&productsPerPage={{productsPerPage}}{{#if brand}}&brand={{brand}}{{/if}}{{#if sort}}&sort={{sort}}{{/if}}"
+        {{else}}
+        value="/products/{{type}}?page=1&productsPerPage={{productsPerPage}}&priceRange=140/200{{#if brand}}&brand={{brand}}{{/if}}{{#if sort}}&sort={{sort}}{{/if}}"
+        {{/if}} name="140/200" onchange="location = this.value" />
       <label for="140/200">140.00$ - 200.00$</label>
     </div>
     <div class="price-filter">
       <input type="checkbox" {{#if selectedPriceFilter.priceFilterFive}} checked="true" {{/if}} {{#if
-        selectedPriceFilter.priceFilterFive}} value="/products/{{type}}?page=1&productsPerPage={{productsPerPage}}"
-        {{else}} value="/products/{{type}}?page=1&productsPerPage={{productsPerPage}}&priceRange=200/400" {{/if}}
-        value="/products/{{type}}?page=1&productsPerPage={{productsPerPage}}&priceRange=200/400" name="200/400"
-        onchange="location = this.value" />
+        selectedPriceFilter.priceFilterFive}}
+        value="/products/{{type}}?page=1&productsPerPage={{productsPerPage}}{{#if brand}}&brand={{brand}}{{/if}}{{#if sort}}&sort={{sort}}{{/if}}"
+        {{else}}
+        value="/products/{{type}}?page=1&productsPerPage={{productsPerPage}}&priceRange=200/400{{#if brand}}&brand={{brand}}{{/if}}{{#if sort}}&sort={{sort}}{{/if}}"
+        {{/if}} name="200/400" onchange="location = this.value" />
       <label for="200/400">200.00$ - 400.00$</label>
     </div>
   </div>
@@ -92,21 +117,28 @@
       <label for="results">Results:</label>
       <select name="results" id="results" onchange="location = this.value">
         <option {{#if selectedProductsPerPage.selectedFive}} selected="true" {{/if}}
-          value="/products/{{type}}?page=1&productsPerPage=5{{#if priceRange}}&priceRange={{priceRange}}{{/if}}">5
+          value="/products/{{type}}?page=1&productsPerPage=5{{#if priceRange}}&priceRange={{priceRange}}{{/if}}{{#if brand}}&brand={{brand}}{{/if}}{{#if sort}}&sort={{sort}}{{/if}}">
+          5
         </option>
         <option {{#if selectedProductsPerPage.selectedTen}} selected="true" {{/if}}
-          value="/products/{{type}}?page=1&productsPerPage=10{{#if priceRange}}&priceRange={{priceRange}}{{/if}}">10
+          value="/products/{{type}}?page=1&productsPerPage=10{{#if priceRange}}&priceRange={{priceRange}}{{/if}}{{#if brand}}&brand={{brand}}{{/if}}{{#if sort}}&sort={{sort}}{{/if}}">
+          10
         </option>
         <option {{#if selectedProductsPerPage.selectedFifteen}} selected="true" {{/if}}
-          value="/products/{{type}}?page=1&productsPerPage=15{{#if priceRange}}&priceRange={{priceRange}}{{/if}}">15
+          value="/products/{{type}}?page=1&productsPerPage=15{{#if priceRange}}&priceRange={{priceRange}}{{/if}}{{#if brand}}&brand={{brand}}{{/if}}{{#if sort}}&sort={{sort}}{{/if}}">
+          15
         </option>
       </select>
     </div>
     <div class="sort-container">
       <label for="sort">Sort by:</label>
-      <select name="sort" id="sort">
-        <option value="lowest">Lowest price</option>
-        <option value="highest">Highest price</option>
+      <select name="sort" id="sort" onchange="location = this.value">
+        <option {{#if selectedSortFilter.sortLowestPrice}} selected="true" {{/if}}
+          value="/products/{{type}}?page=1&productsPerPage={{productsPerPage}}&sort=price_lowest{{#if priceRange}}&priceRange={{priceRange}}{{/if}}{{#if brand}}&brand={{brand}}{{/if}}">
+          Lowest price</option>
+        <option {{#if selectedSortFilter.sortHighestPrice}} selected="true" {{/if}}
+          value="/products/{{type}}?page=1&productsPerPage={{productsPerPage}}&sort=price_highest{{#if priceRange}}&priceRange={{priceRange}}{{/if}}{{#if brand}}&brand={{brand}}{{/if}}">
+          Highest price</option>
       </select>
     </div>
   </div>
@@ -149,7 +181,7 @@
   <div class="pagination-container">
     {{#each pageIndex}}
 
-    <a href="/products/{{type}}?page={{page}}&productsPerPage={{productsPerPage}}{{#if priceRange}}&priceRange={{priceRange}}{{/if}}"
+    <a href="/products/{{type}}?page={{page}}&productsPerPage={{productsPerPage}}{{#if priceRange}}&priceRange={{priceRange}}{{/if}}{{#if brand}}&brand={{brand}}{{/if}}{{#if sort}}&sort={{sort}}{{/if}}"
       {{#if currentPage}} class="currentPage" {{/if}}>{{page}}</a>
 
     {{/each}}
