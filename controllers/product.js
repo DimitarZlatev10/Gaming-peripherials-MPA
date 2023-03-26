@@ -11,6 +11,7 @@ const {
   getAllProductsByBrandAndPrice,
   paginateByBrandAndPrice,
   getAllProducts,
+  getSimilarProducts,
 } = require("../services/product");
 const { mapErrors } = require("../utils/errorDisplayer");
 const {
@@ -22,6 +23,32 @@ const router = require("express").Router();
 
 router.get("/details/:id", async (req, res) => {
   const product = await getProductById(req.params.id);
+
+  let from;
+  let to;
+  if (Number(product.price) >= 10 && Number(product.price) <= 40) {
+    from = 10;
+    to = 40;
+  } else if (Number(product.price) > 40 && Number(product.price) <= 80) {
+    from = 41;
+    to = 80;
+  } else if (Number(product.price) > 80 && Number(product.price) <= 140) {
+    from = 81;
+    to = 140;
+  } else if (Number(product.price) > 140 && Number(product.price) <= 200) {
+    from = 141;
+    to = 200;
+  } else if (Number(product.price) > 200 && Number(product.price) <= 400) {
+    from = 201;
+    to = 400;
+  }
+
+  const similarProducts = await getSimilarProducts(
+    product.type,
+    product._id,
+    from,
+    to
+  );
 
   if (product.comments.length > 0) {
     if (req.session.user) {
@@ -70,9 +97,14 @@ router.get("/details/:id", async (req, res) => {
       totalReviews,
       productId,
       stars,
+      similarProducts,
     });
   } else {
-    res.render("details", { title: `${product.title}`, product });
+    res.render("details", {
+      title: `${product.title}`,
+      product,
+      similarProducts,
+    });
   }
 });
 

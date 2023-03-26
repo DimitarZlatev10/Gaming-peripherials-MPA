@@ -1,7 +1,7 @@
 <div class="details-container">
   <div class="product-title-logo">
     <h1>{{product.title}}</h1>
-    <a href="#">
+    <a href="/products/{{product.type}}?page=1&productsPerPage=5&brand={{product.brand}}">
       <img src="{{product.brandLogo}}" alt="" />
     </a>
   </div>
@@ -96,83 +96,27 @@
   </div>
 </section>
 
+{{#if similarProducts}}
 <h1 class="similar-products-title">Similar Products</h1>
 <div class="similar-products-container">
+  {{#each similarProducts}}
   <div class="similar-product">
-    <a href="#">
-      <img src="#" alt="img" />
+    <a href="/details/{{_id}}">
+      <img src="{{image}}" alt="img" />
     </a>
-    <h1>Product Title</h1>
-    <p>USB</p>
-    <p>Gaming Mouse</p>
-    <p>Black</p>
+    <h1>{{title}}</h1>
+    <p>{{connectivity}}</p>
+    <p>{{type}}</p>
+    <p>{{color}}</p>
     <div class="price-logo">
-      <p>20$</p>
-      <a href="#">
-        <img src="#" />
+      <p>{{price}}$</p>
+      <a href="/products/{{type}}?page=1&productsPerPage=5&brand={{brand}}">
+        <img src="{{brandLogo}}" />
       </a>
     </div>
   </div>
-  <div class="similar-product">
-    <a href="#">
-      <img src="#" alt="img" />
-    </a>
-    <h1>Product Title</h1>
-    <p>USB</p>
-    <p>Gaming Mouse</p>
-    <p>Black</p>
-    <div class="price-logo">
-      <p>20$</p>
-      <a href="#">
-        <img src="#" />
-      </a>
-    </div>
-  </div>
-  <div class="similar-product">
-    <a href="#">
-      <img src="#" alt="img" />
-    </a>
-    <h1>Product Title</h1>
-    <p>USB</p>
-    <p>Gaming Mouse</p>
-    <p>Black</p>
-    <div class="price-logo">
-      <p>20$</p>
-      <a href="#">
-        <img src="#" />
-      </a>
-    </div>
-  </div>
-  <div class="similar-product">
-    <a href="#">
-      <img src="#" alt="img" />
-    </a>
-    <h1>Product Title</h1>
-    <p>USB</p>
-    <p>Gaming Mouse</p>
-    <p>Black</p>
-    <div class="price-logo">
-      <p>20$</p>
-      <a href="#">
-        <img src="#" />
-      </a>
-    </div>
-  </div>
-  <div class="similar-product">
-    <a href="#">
-      <img src="#" alt="img" />
-    </a>
-    <h1>Product Title</h1>
-    <p>USB</p>
-    <p>Gaming Mouse</p>
-    <p>Black</p>
-    <div class="price-logo">
-      <p>20$</p>
-      <a href="#">
-        <img src="#" />
-      </a>
-    </div>
-  </div>
+  {{/each}}
+  {{/if}}
 </div>
 
 <section id="comments">

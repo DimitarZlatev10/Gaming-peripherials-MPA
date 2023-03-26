@@ -8,6 +8,16 @@ async function getFiveProducts() {
   return Product.find({}).limit(5).lean();
 }
 
+async function getSimilarProducts(type, currentProductId, from, to) {
+  return Product.find({
+    _id: { $ne: currentProductId },
+    type: type,
+    price: { $gte: from, $lte: to },
+  })
+    .limit(6)
+    .lean();
+}
+
 async function getProductById(productId) {
   return Product.findById(productId).lean();
 }
@@ -215,4 +225,5 @@ module.exports = {
   getAllProductsByBrand,
   paginateByBrandAndPrice,
   getAllProductsByBrandAndPrice,
+  getSimilarProducts,
 };
