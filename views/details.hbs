@@ -1,81 +1,270 @@
 <div class="details-container">
-  <div class="product-container">
-    <img src="{{product.image}}" alt="" />
+  <div class="product-title-logo">
     <h1>{{product.title}}</h1>
-    <!-- <p>The newest and best iphone 12</p> -->
-    <p>
-      {{#if finalRating}}
-        Rating:
-        {{finalRating}}/5
-        <span>({{totalReviews}} Reviews)</span>
+    <a href="#">
+      <img src="{{product.brandLogo}}" alt="" />
+    </a>
+  </div>
+
+  <div class="product-details-image-container">
+    <img src="{{product.image}}" />
+  </div>
+
+  <div class="product-basic-characteristics-container">
+    <h1>Main Characteristics</h1>
+    {{#each product.mainCharacteristics}}
+    <p><i class="fas fa-check"></i> {{char}} </p>
+    {{/each}}
+    {{!-- <p><i class="fas fa-check"></i> bbbb</p>
+    <p><i class="fas fa-check"></i> cccc</p>
+    <p><i class="fas fa-check"></i> dddd</p> --}}
+    <a href="#characteristics" class="check-full-characteristics">
+      full characteristics <i class="fas fa-arrow-right"></i>
+    </a>
+  </div>
+
+  <div class="price-section-container">
+    <div class="price-section">
+      <h1>{{product.price}}$</h1>
+    </div>
+    <div class="availability-section">
+      {{#if product.available}}
+      <div class="available-icon">
+        <i class="fas fa-check"></i>
+      </div>
+      <div class="available-text">
+        <h2>Available</h2>
+        <p>Order now and the product will arrive in 1-3 days</p>
+      </div>
       {{else}}
-        There are no reviews for this product!
+      <div class="unavailable-icon">
+        <i class="fas fa-ban"></i>
+      </div>
+      <div class="unavailable-text">
+        <h2>Unavailable</h2>
+        <p>This product is out of stock</p>
+      </div>
       {{/if}}
-    </p>
-    <h2>{{product.price}}$</h2>
-    <button>Add to cart!</button>
-    <h3>{{product.description}}</h3>
+    </div>
+    <div class="delivery-section">
+      <div class="delivery-icon">
+        <i class="fas fa-check"></i>
+      </div>
+      <div class="delivery-text">
+        <h2>Free delivery</h2>
+        <p>for orders over 59.99$</p>
+      </div>
+    </div>
+    <div class="buttons-section">
+      <a href="#"> <i class="fas fa-shopping-cart"></i> Add To Cart</a>
+      <a href="#"> <i class="fas fa-heart"></i> Add To Favourites</a>
+      <a href="#comments">Leave a review</a>
+    </div>
   </div>
 </div>
 
-<div class="comment-section-container-background">
+<section id="characteristics">
+  <div class="technical-characteristics">
+    <h1>Technical Characteristics</h1>
+    <div class="product-brand-name">
+      <p>
+        Brand <span> <a
+            href="/products/{{product.type}}?page=1&productsPerPage=5&brand={{product.brand}}">{{product.brand}}</a>
+        </span>
+      </p>
+    </div>
+    <div class="product-color">
+      <p>
+        Color <span> <a href="#">{{product.color}}</a> </span>
+      </p>
+    </div>
+    <div class="product-type">
+      <p>
+        Type <span> <a href="/products/{{product.type}}">{{product.type}}</a>
+        </span>
+      </p>
+    </div>
+    <div class="product-description">
+      <p>
+        Description
+        <span>{{product.description}}</span>
+      </p>
+    </div>
+    <div class="product-connectivity">
+      <p>Connectivity <span>{{product.connectivity}}</span></p>
+    </div>
+  </div>
+</section>
+
+<h1 class="similar-products-title">Similar Products</h1>
+<div class="similar-products-container">
+  <div class="similar-product">
+    <a href="#">
+      <img src="#" alt="img" />
+    </a>
+    <h1>Product Title</h1>
+    <p>USB</p>
+    <p>Gaming Mouse</p>
+    <p>Black</p>
+    <div class="price-logo">
+      <p>20$</p>
+      <a href="#">
+        <img src="#" />
+      </a>
+    </div>
+  </div>
+  <div class="similar-product">
+    <a href="#">
+      <img src="#" alt="img" />
+    </a>
+    <h1>Product Title</h1>
+    <p>USB</p>
+    <p>Gaming Mouse</p>
+    <p>Black</p>
+    <div class="price-logo">
+      <p>20$</p>
+      <a href="#">
+        <img src="#" />
+      </a>
+    </div>
+  </div>
+  <div class="similar-product">
+    <a href="#">
+      <img src="#" alt="img" />
+    </a>
+    <h1>Product Title</h1>
+    <p>USB</p>
+    <p>Gaming Mouse</p>
+    <p>Black</p>
+    <div class="price-logo">
+      <p>20$</p>
+      <a href="#">
+        <img src="#" />
+      </a>
+    </div>
+  </div>
+  <div class="similar-product">
+    <a href="#">
+      <img src="#" alt="img" />
+    </a>
+    <h1>Product Title</h1>
+    <p>USB</p>
+    <p>Gaming Mouse</p>
+    <p>Black</p>
+    <div class="price-logo">
+      <p>20$</p>
+      <a href="#">
+        <img src="#" />
+      </a>
+    </div>
+  </div>
+  <div class="similar-product">
+    <a href="#">
+      <img src="#" alt="img" />
+    </a>
+    <h1>Product Title</h1>
+    <p>USB</p>
+    <p>Gaming Mouse</p>
+    <p>Black</p>
+    <div class="price-logo">
+      <p>20$</p>
+      <a href="#">
+        <img src="#" />
+      </a>
+    </div>
+  </div>
+</div>
+
+<section id="comments">
+  <h1> Feel free to leave a review here! </h1>
   <div class="comment-section-container">
     <div class="comment-section">
-
       {{#if hasUser}}
-        <form
-          action="/addComment/{{product._id}}"
-          method="post"
-          class="comment-form"
-        >
-          <h1>
-            {{#if totalReviews}}Leave your review here!{{else}}Be the first to
-              leave a review!{{/if}}</h1>
-          <div class="rating-container">
-            <input
-              type="number"
-              name="rating"
-              class="form-input"
-              placeholder="Rate 0/5"
-              min="1"
-              max="5"
-            />
-          </div>
+      <form action="/addComment/{{product._id}}" method="post">
+        <label for="rating">Enter Rating</label>
+        <input type="number" min="1" max="5" id="rating" name="rating" placeholder="1/5" value="{{rating}}" />
 
-          <input
-            type="text"
-            name="comment"
-            class="form-input"
-            placeholder="Your Comment..."
-          />
+        <label for="title">Enter Title</label>
+        <input type="text" id="title" name="title" placeholder="Title" value="{{commentTitle}}" />
 
-          <button type="submit">Comment!</button>
-        </form>
+        <label for="comment">Enter Comment</label>
+        <textarea id="comment" name="comment" placeholder="Write something.."
+          style="height: 200px">{{comment}}</textarea>
+
+        <input type="submit" value="Submit" />
+      </form>
+
       {{else}}
-        <div class="noUser">
-          <h1>You need to log in to leave a review</h1>
-          <a href="/login">Login</a>
-        </div>
+      <div class="noUser">
+        <h1>You need to log in to leave a review</h1>
+        <a href="/login">Login</a>
+      </div>
       {{/if}}
     </div>
 
-    <div class="user-comments">
-      {{#each product.comments}}
-        <div class="comment">
-          <div class="user-image">
-            {{#if isOwner}}
-              <a
-                href="/deleteComment/{{productId}}/{{_id}}"
-                class="delete-comment"
-              >delete</a>
-            {{/if}}
-            <img src="{{userImage}}" />
-            <h1>{{username}}</h1>
-          </div>
-          <h3>{{comment}}</h3>
-          <p>Rating: {{rating}}/5</p>
-        </div>
-      {{/each}}
+    <div class="rating-container">
+      {{#if finalRating}}
+      <div class="total-rating">
+        <h1>{{finalRating}} / 5</h1>
+        <h2>
+          {{#if stars.oneStar}} <i class="fas fa-star"></i>
+          {{/if}}
+
+          {{#if stars.twoStar}} <i class="fas fa-star"></i> <i class="fas fa-star"></i>
+          {{/if}}
+
+          {{#if stars.threeStar}} <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i>
+          {{/if}}
+
+          {{#if stars.fourStar}} <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+            class="fas fa-star"></i>
+          {{/if}}
+
+          {{#if stars.fiveStar}} <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+            class="fas fa-star"></i> <i class="fas fa-star"></i>
+          {{/if}}
+        </h2>
+        <p>{{totalReviews}} reviews</p>
+      </div>
+      {{else}}
+      <h1 class="no-reviews">There are no reviews for this product yet, <br> be the first one to add a review!</h1>
+      {{/if}}
     </div>
   </div>
+</section>
+
+<div class="user-comments-container">
+  {{#each product.comments}}
+  <div class="comment">
+    {{#if isOwner}}
+    <a href="/deleteComment/{{productId}}/{{_id}}" class="delete-comment"> <i class="fas fa-remove"></i> </a>
+    {{/if}}
+    <div class="username-picture">
+      <h1>{{username}}</h1>
+      <img src="{{userImage}}" />
+    </div>
+    <div class="comment-info">
+      <h1>{{title}}</h1>
+      <p>
+        {{#if oneStar}} <i class="fas fa-star"></i>
+        {{/if}}
+
+        {{#if twoStar}} <i class="fas fa-star"></i> <i class="fas fa-star"></i>
+        {{/if}}
+
+        {{#if threeStar}} <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i>
+        {{/if}}
+
+        {{#if fourStar}} <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+          class="fas fa-star"></i>
+        {{/if}}
+
+        {{#if fiveStar}} <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i class="fas fa-star"></i> <i
+          class="fas fa-star"></i> <i class="fas fa-star"></i>
+        {{/if}}
+      </p>
+      <h2>{{comment}}</h2>
+    </div>
+  </div>
+  {{/each}}
 </div>

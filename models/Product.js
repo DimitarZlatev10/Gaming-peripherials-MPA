@@ -29,10 +29,6 @@ const productSchema = new Schema({
     type: String,
     required: true,
   },
-  inStock: {
-    type: Number,
-    required: true,
-  },
   available: {
     type: Boolean,
     required: true,

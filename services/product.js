@@ -21,6 +21,7 @@ async function addComment(productId, comment) {
           _id: comment._id,
           username: comment.username,
           rating: comment.rating,
+          title: comment.title,
           comment: comment.comment,
           owner: comment.owner,
           productId: productId,

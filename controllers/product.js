@@ -38,13 +38,38 @@ router.get("/details/:id", async (req, res) => {
     product.comments.forEach((r) => {
       totalRating += Number(r.rating);
     });
+
+    product.comments.forEach((r) => {
+      if (Number(r.rating) >= 1 && Number(r.rating) < 2) {
+        r.oneStar = true;
+      } else if (Number(r.rating) >= 2 && Number(r.rating) < 3) {
+        r.twoStar = true;
+      } else if (Number(r.rating) >= 3 && Number(r.rating) < 4) {
+        r.threeStar = true;
+      } else if (Number(r.rating) >= 4 && Number(r.rating) < 5) {
+        r.fourStar = true;
+      } else if (Number(r.rating) >= 5) {
+        r.fiveStar = true;
+      }
+    });
+
     let finalRating = (totalRating / totalReviews).toFixed(1);
+
+    let stars = {
+      oneStar: finalRating >= 1 && finalRating < 2,
+      twoStar: finalRating >= 2 && finalRating < 3,
+      threeStar: finalRating >= 3 && finalRating < 4,
+      fourStar: finalRating >= 4 && finalRating < 5,
+      fiveStar: finalRating >= 5,
+    };
+
     res.render("details", {
       title: `${product.title}`,
       product,
       finalRating,
       totalReviews,
       productId,
+      stars,
     });
   } else {
     res.render("details", { title: `${product.title}`, product });
@@ -57,10 +82,15 @@ router.post("/addComment/:id", isUser(), async (req, res) => {
       throw new Error("Rating is required and must be between 1 and 5");
     }
 
+    if (req.body.title == "") {
+      throw new Error("Title is required");
+    }
+
     const commentInfo = {
       _id: new ObjectId(),
       username: `${req.session.user.firstName} ${req.session.user.lastName}`,
       rating: req.body.rating,
+      title: req.body.title,
       comment: req.body.comment,
       owner: req.session.user._id,
       productId: req.params.id,
@@ -68,12 +98,19 @@ router.post("/addComment/:id", isUser(), async (req, res) => {
     };
 
     await addComment(req.params.id, commentInfo);
-    res.redirect("/details/" + req.params.id);
+    res.redirect(`/details/${req.params.id}#comments`);
   } catch (err) {
     console.error(err.message);
     const errors = mapErrors(err);
     const product = await getProductById(req.params.id);
-    res.render("details", { title: `${product.title}`, errors, product });
+    res.render("details", {
+      title: `${product.title}`,
+      errors,
+      product,
+      rating: req.body.rating,
+      commentTitle: req.body.title,
+      comment: req.body.comment,
+    });
   }
 });
 
@@ -83,7 +120,7 @@ router.get(
   async (req, res) => {
     try {
       await deleteComment(req.params.productId, req.params.commentId);
-      res.redirect("/details/" + req.params.productId);
+      res.redirect(`/details/${req.params.productId}#comments`);
     } catch (err) {
       console.error(err);
     }
