@@ -1,4 +1,5 @@
 const Product = require("../models/Product");
+const User = require("../models/User");
 
 async function getAllProducts(type) {
   return Product.find({ type: type }).lean();
@@ -211,6 +212,100 @@ async function getAllProductsByBrandAndPrice(type, brand, from, to) {
   });
 }
 
+async function addToFavourites(userId, productId) {
+  const user = await User.findById(userId);
+  const product = await Product.findById(productId);
+
+  if (!user) {
+    throw new Error("User does not exist");
+  } else if (!product) {
+    throw new Error("Product does not exist");
+  }
+
+  if (user.favourites.includes(productId)) {
+    throw new Error("This product is already added to your favourites");
+  } else if (product.favourites.includes(userId)) {
+    throw new Error("This product is already added to your favourites!");
+  }
+
+  user.favourites.push(productId);
+  product.favourites.push(userId);
+
+  await user.save();
+  await product.save();
+
+  return { message: "Sucessfully added to your favourites" };
+}
+
+async function removeFromFavourites(userId, productId) {
+  const user = await User.findById(userId);
+  const product = await Product.findById(productId);
+
+  if (!user) {
+    throw new Error("User does not exist");
+  } else if (!product) {
+    throw new Error("Product does not exist");
+  }
+
+  const userIndex = product.favourites.indexOf(userId);
+  const productIndex = user.favourites.indexOf(productId);
+
+  user.favourites.splice(productIndex, 1);
+  product.favourites.splice(userIndex, 1);
+
+  await user.save();
+  await product.save();
+
+  return { message: "Product sucessfully removed from your favourites" };
+}
+
+async function addToCart(userId, productId) {
+  const user = await User.findById(userId);
+  const product = await Product.findById(productId);
+
+  if (!user) {
+    throw new Error("User does not exist");
+  } else if (!product) {
+    throw new Error("Product does not exist");
+  }
+
+  if (user.cart.includes(productId)) {
+    throw new Error("This product is already added to your cart");
+  } else if (product.cart.includes(userId)) {
+    throw new Error("This product is already added to your cart!");
+  }
+
+  user.cart.push(productId);
+  product.cart.push(userId);
+
+  await user.save();
+  await product.save();
+
+  return { message: "Sucessfully added to your cart" };
+}
+
+async function removeFromCart(userId, productId) {
+  const user = await User.findById(userId);
+  const product = await Product.findById(productId);
+
+  if (!user) {
+    throw new Error("User does not exist");
+  } else if (!product) {
+    throw new Error("Product does not exist");
+  }
+
+  const userIndex = product.cart.indexOf(userId);
+  const productIndex = user.cart.indexOf(productId);
+
+  user.cart.splice(productIndex, 1);
+  product.cart.splice(userIndex, 1);
+
+  await user.save();
+  await product.save();
+
+  return { message: "Product sucessfully removed from your favourites" };
+}
+
 module.exports = {
   getAllProducts,
   getProductById,
@@ -226,4 +321,8 @@ module.exports = {
   paginateByBrandAndPrice,
   getAllProductsByBrandAndPrice,
   getSimilarProducts,
+  addToFavourites,
+  removeFromFavourites,
+  addToCart,
+  removeFromCart,
 };

@@ -12,6 +12,10 @@ const {
   paginateByBrandAndPrice,
   getAllProducts,
   getSimilarProducts,
+  addToFavourites,
+  removeFromFavourites,
+  addToCart,
+  removeFromCart,
 } = require("../services/product");
 const { mapErrors } = require("../utils/errorDisplayer");
 const {
@@ -50,6 +54,23 @@ router.get("/details/:id", async (req, res) => {
     to
   );
 
+  const productId = product._id;
+  const userId = req.session.user ? req.session.user._id : "noUser";
+
+  product.favourites.forEach((f) => {
+    if (f._id == userId) {
+      product.isFavourited = true;
+    }
+  });
+
+  product.cart.forEach((c) => {
+    if (c._id == userId) {
+      product.isAddedToCart = true;
+    }
+  });
+
+  req.session.redirectUrl = `/details/${product._id}`;
+
   if (product.comments.length > 0) {
     if (req.session.user) {
       product.comments.forEach((c) => {
@@ -59,7 +80,6 @@ router.get("/details/:id", async (req, res) => {
       });
     }
 
-    const productId = product._id;
     let totalRating = 0;
     let totalReviews = product.comments.length;
     product.comments.forEach((r) => {
@@ -98,12 +118,14 @@ router.get("/details/:id", async (req, res) => {
       productId,
       stars,
       similarProducts,
+      userId,
     });
   } else {
     res.render("details", {
       title: `${product.title}`,
       product,
       similarProducts,
+      userId,
     });
   }
 });
@@ -143,6 +165,46 @@ router.post("/addComment/:id", isUser(), async (req, res) => {
       commentTitle: req.body.title,
       comment: req.body.comment,
     });
+  }
+});
+
+router.get("/addToFavourites/:productId", isUser(), async (req, res) => {
+  try {
+    await addToFavourites(req.session.user._id, req.params.productId);
+    res.redirect(req.session.redirectUrl);
+    delete req.session.redirectUrl;
+  } catch (err) {
+    console.error(err);
+  }
+});
+
+router.get("/removeFromFavourites/:productId", isUser(), async (req, res) => {
+  try {
+    await removeFromFavourites(req.session.user._id, req.params.productId);
+    res.redirect(req.session.redirectUrl);
+    delete req.session.redirectUrl;
+  } catch (err) {
+    console.error(err);
+  }
+});
+
+router.get("/addToCart/:productId", isUser(), async (req, res) => {
+  try {
+    await addToCart(req.session.user._id, req.params.productId);
+    res.redirect(req.session.redirectUrl);
+    delete req.session.redirectUrl;
+  } catch (err) {
+    console.error(err);
+  }
+});
+
+router.get("/removeFromCart/:productId", isUser(), async (req, res) => {
+  try {
+    await removeFromCart(req.session.user._id, req.params.productId);
+    res.redirect(req.session.redirectUrl);
+    delete req.session.redirectUrl;
+  } catch (err) {
+    console.error(err);
   }
 });
 
@@ -325,6 +387,26 @@ router.get("/products/:type", async (req, res) => {
   if (priceRange || brand) {
     activeFilters = true;
   }
+
+  let userId = req.session.user ? req.session.user._id : "noUser";
+
+  products.forEach((f) => {
+    f.favourites.forEach((fp) => {
+      if (fp._id == userId) {
+        f.isFavourited = true;
+      }
+    });
+  });
+
+  products.forEach((c) => {
+    c.cart.forEach((cp) => {
+      if (cp._id == userId) {
+        c.isAddedToCart = true;
+      }
+    });
+  });
+
+  req.session.redirectUrl = req.url;
 
   // console.log(pageIndex);
 

@@ -26,7 +26,12 @@ router.post("/register", isGuest(), async (req, res) => {
 
     req.session.user = user;
 
-    res.redirect("/");
+    if (req.session.redirectUrl) {
+      res.redirect(req.session.redirectUrl);
+      delete req.session.redirectUrl;
+    } else {
+      res.redirect("/");
+    }
   } catch (err) {
     console.error(err);
     const errors = mapErrors(err);
@@ -48,7 +53,13 @@ router.post("/login", isGuest(), async (req, res) => {
   try {
     const user = await login(req.body.email, req.body.password);
     req.session.user = user;
-    res.redirect("/");
+
+    if (req.session.redirectUrl) {
+      res.redirect(req.session.redirectUrl);
+      delete req.session.redirectUrl;
+    } else {
+      res.redirect("/");
+    }
   } catch (err) {
     console.error(err);
     const errors = mapErrors(err);

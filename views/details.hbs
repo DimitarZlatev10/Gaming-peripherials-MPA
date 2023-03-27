@@ -15,9 +15,6 @@
     {{#each product.mainCharacteristics}}
     <p><i class="fas fa-check"></i> {{char}} </p>
     {{/each}}
-    {{!-- <p><i class="fas fa-check"></i> bbbb</p>
-    <p><i class="fas fa-check"></i> cccc</p>
-    <p><i class="fas fa-check"></i> dddd</p> --}}
     <a href="#characteristics" class="check-full-characteristics">
       full characteristics <i class="fas fa-arrow-right"></i>
     </a>
@@ -56,9 +53,26 @@
       </div>
     </div>
     <div class="buttons-section">
-      <a href="#"> <i class="fas fa-shopping-cart"></i> Add To Cart</a>
-      <a href="#"> <i class="fas fa-heart"></i> Add To Favourites</a>
-      <a href="#comments">Leave a review</a>
+      {{!-- {{#if product.available}} --}}
+      {{#if product.isAddedToCart}}
+      <a id="removeFromCart" href="/removeFromCart/{{product._id}}"> <i class="fas fa-shopping-cart"></i>Remove From
+        Cart</a>
+      {{else}}
+      <a href="/addToCart/{{product._id}}"> <i class="fas fa-shopping-cart"></i>Add To Cart</a>
+      {{/if}}
+      {{!-- {{/if}} --}}
+
+      {{#if product.isFavourited}}
+      <a id="removeFromFavourites" href="/removeFromFavourites/{{product._id}}"> <i class="fas fa-heart"></i> Remove
+        From
+        Favourites</a>
+      {{else}}
+      <a href="/addToFavourites/{{product._id}}"> <i class="fas fa-heart"></i> Add To Favourites</a>
+      {{/if}}
+
+      <div class="leave-review">
+        <a href="#comments">Leave a review</a>
+      </div>
     </div>
   </div>
 </div>

@@ -189,8 +189,17 @@
     </h2>
     <p>{{price}}.00$</p>
     <div class="buttons-container">
-      <a href="#"> <i class="fas fa-shopping-cart"></i></a>
-      <a href="#"> <i class="fas fa-heart"></i></a>
+      {{#if isAddedToCart}}
+      <a id="removeCart" href="/removeFromCart/{{_id}}"> <i class="fas fa-shopping-cart"></i></a>
+      {{else}}
+      <a id="addCart" href="/addToCart/{{_id}}"> <i class="fas fa-shopping-cart"></i></a>
+      {{/if}}
+
+      {{#if isFavourited}}
+      <a id="removeFavourites" href="/removeFromFavourites/{{_id}}"> <i class="fas fa-heart"></i></a>
+      {{else}}
+      <a href="/addToFavourites/{{_id}}"> <i class="fas fa-heart"></i></a>
+      {{/if}}
     </div>
   </div>
 
