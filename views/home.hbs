@@ -3,21 +3,91 @@
     <div class="swiper-wrapper">
       <!-- products  -->
       {{#each products}}
-        <div class="swiper-slide slide">
-          <div class="image">
-            <img src="{{image}}" />
-          </div>
-          <div class="content">
-            <h1>{{title}}</h1>
-            <p>{{price}}$</p>
-            <h3>{{type}}</h3>
-            <h4>{{shortDescription}}</h4>
-            <a class="btn" href="/details/{{_id}}">Shop Now!</a>
-          </div>
+      <div class="swiper-slide slide">
+        <div class="image">
+          <img src="{{image}}" />
         </div>
+        <div class="content">
+          <h1>{{title}}</h1>
+          <p>{{price}}$</p>
+          <h3>{{type}}</h3>
+          <h4>{{shortDescription}}</h4>
+          <a class="btn" href="/details/{{_id}}">Shop Now!</a>
+        </div>
+      </div>
       {{/each}}
     </div>
     <div class="swiper-button-next"></div>
     <div class="swiper-button-prev"></div>
   </div>
 </section>
+
+<div class="features">
+  <div class="feature">
+    <img src="/static/images/shipping.png" class="featureImg" />
+    <span class="featureTitle">FREE SHIPPING</span>
+    <span class="featureDescription">Free worldwide shipping on all orders over 59.99$.</span>
+  </div>
+
+  <div class="feature">
+    <img src="/static/images/return.png" class="featureImg" />
+    <span class="featureTitle">30 DAYS RETURN</span>
+    <span class="featureDescription">No question return and easy refund in 14 days.</span>
+  </div>
+
+  <div class="feature">
+    <img src="/static/images/gift.png" class="featureImg" />
+    <span class="featureTitle">GIFT CARDS</span>
+    <span class="featureDescription">Buy gift cards and user coupon codes easily.</span>
+  </div>
+
+  <div class="feature">
+    <img src="/static/images/contact.png" class="featureImg" />
+    <span class="featureTitle">CONTACT US!</span>
+    <span class="featureDescription">Keep in touch via email and support system.</span>
+  </div>
+</div>
+
+<div class="panels">
+  <div class="panel">
+    <a href="#">
+      <img src="/static/images/razer-panel.webp" alt="">
+    </a>
+  </div>
+  <div class="panel">
+    <a href="#">
+      <img src="/static/images/asus-panel.jpg" alt="">
+    </a>
+  </div>
+  <div class="panel">
+    <a href="#">
+      <img src="/static/images/cougar-panel.jpg" alt="">
+    </a>
+  </div>
+  <div class="panel">
+    <a href="#">
+      <img src="/static/images/logitech-panel.jpg" alt="">
+    </a>
+  </div>
+</div>
+
+<h1 class="most-favorited-title">Most Favorited</h1>
+<div class="most-favorited-container">
+  {{#each mostFavorited}}
+  <div class="favorited">
+    <a href="/details/{{_id}}">
+      <img src="{{image}}" alt="img" />
+    </a>
+    <h1>{{title}}</h1>
+    <p>{{connectivity}}</p>
+    <p>{{type}}</p>
+    <p>{{color}}</p>
+    <div class="price-logo">
+      <p>{{price}}$</p>
+      <a href="/products/{{type}}?page=1&productsPerPage=5&brand={{brand}}">
+        <img src="{{brandLogo}}" />
+      </a>
+    </div>
+  </div>
+  {{/each}}
+</div>

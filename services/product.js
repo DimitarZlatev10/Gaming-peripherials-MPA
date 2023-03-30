@@ -19,6 +19,15 @@ async function getSimilarProducts(type, currentProductId, from, to) {
     .lean();
 }
 
+async function getMostFavoritedProducts() {
+  return Product.find({})
+    .sort({
+      favourites: -1,
+    })
+    .limit(5)
+    .lean();
+}
+
 async function getProductById(productId) {
   return Product.findById(productId).lean();
 }
@@ -325,4 +334,5 @@ module.exports = {
   removeFromFavourites,
   addToCart,
   removeFromCart,
+  getMostFavoritedProducts,
 };
