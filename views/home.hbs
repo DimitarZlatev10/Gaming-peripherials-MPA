@@ -71,9 +71,11 @@
   </div>
 </div>
 
+
 <h1 class="most-favorited-title">Most Favorited</h1>
 <div class="most-favorited-container">
   {{#each mostFavorited}}
+  {{#if isFavorited}}
   <div class="favorited">
     <a href="/details/{{_id}}">
       <img src="{{image}}" alt="img" />
@@ -89,5 +91,6 @@
       </a>
     </div>
   </div>
+  {{/if}}
   {{/each}}
 </div>

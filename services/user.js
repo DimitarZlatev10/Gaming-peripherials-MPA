@@ -39,7 +39,12 @@ async function login(email, password) {
   return user;
 }
 
+async function getUser(userId) {
+  return User.findById(userId).lean();
+}
+
 module.exports = {
   register,
   login,
+  getUser,
 };

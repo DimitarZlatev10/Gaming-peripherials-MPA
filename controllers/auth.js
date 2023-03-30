@@ -1,5 +1,6 @@
 const { isGuest, isUser } = require("../middlewares/guards");
-const { register, login } = require("../services/user");
+const { getProductById } = require("../services/product");
+const { register, login, getUser } = require("../services/user");
 const { mapErrors } = require("../utils/errorDisplayer");
 
 const router = require("express").Router();
@@ -70,6 +71,50 @@ router.post("/login", isGuest(), async (req, res) => {
 router.get("/logout", isUser(), (req, res) => {
   delete req.session.user;
   res.redirect("/");
+});
+
+router.get("/favourites", isUser(), async (req, res) => {
+  const user = await getUser(req.session.user._id);
+
+  let favoredItems = [];
+  if (user.favourites.length > 0) {
+    user.favourites.forEach(async (f) => {
+      let favored = await getProductById(f);
+      favoredItems.push(favored);
+    });
+  }
+
+  req.session.redirectUrl = req.url;
+
+  res.render("favourites", {
+    title: "Favourites",
+    favoredItems,
+    totalFavorites: user.favourites.length > 0 ? user.favourites.length : null,
+    totalCarted: user.cart.length > 0 ? user.cart.length : null,
+    user,
+  });
+});
+
+router.get("/cart", isUser(), async (req, res) => {
+  const user = await getUser(req.session.user._id);
+  let cartItems = [];
+
+  if (user.cart.length > 0) {
+    user.cart.forEach(async (c) => {
+      let carted = await getProductById(c);
+      cartItems.push(carted);
+    });
+  }
+
+  req.session.redirectUrl = req.url;
+
+  res.render("cart", {
+    title: "cart",
+    cartItems,
+    totalCarted: user.cart.length > 0 ? user.cart.length : null,
+    totalFavourites: user.favourites.length > 0 ? user.favourites.length : null,
+    user,
+  });
 });
 
 module.exports = router;

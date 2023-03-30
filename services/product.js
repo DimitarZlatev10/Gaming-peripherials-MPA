@@ -256,8 +256,8 @@ async function removeFromFavourites(userId, productId) {
     throw new Error("Product does not exist");
   }
 
-  const userIndex = product.favourites.indexOf(userId);
-  const productIndex = user.favourites.indexOf(productId);
+  let userIndex = product.favourites.indexOf(userId);
+  let productIndex = user.favourites.indexOf(productId);
 
   user.favourites.splice(productIndex, 1);
   product.favourites.splice(userIndex, 1);
