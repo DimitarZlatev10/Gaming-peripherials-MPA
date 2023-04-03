@@ -174,6 +174,9 @@
   {{#each products}}
   <div class="product">
     <div class="product-image-container">
+      {{#if promo}}
+      <div class="promo-message">promo</div>
+      {{/if}}
       {{#if available}}
       <i class="fas fa-check available"></i>
       {{else}}
@@ -189,7 +192,12 @@
       <i class="fas fa-check"></i> {{char}}
     </h2>
     {{/each}}
-    <p>{{price}}.00$</p>
+    {{#if promo}}
+    <p class="original-price">{{price}}.00$</p>
+    <p class="promo-price">{{promoPrice}}.00$</p>
+    {{else}}
+    <p class="no-promo-price">{{price}}.00$</p>
+    {{/if}}
     <div class="buttons-container">
       {{#if isAddedToCart}}
       <a id="removeCart" href="/removeFromCart/{{_id}}"> <i class="fas fa-shopping-cart"></i></a>

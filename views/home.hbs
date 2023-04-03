@@ -1,5 +1,6 @@
 <section class="home">
   <div class="swiper home-slider">
+    <h1>New Promo Offers!</h1>
     <div class="swiper-wrapper">
       <!-- products  -->
       {{#each products}}
@@ -9,7 +10,13 @@
         </div>
         <div class="content">
           <h1>{{title}}</h1>
-          <p>{{price}}$</p>
+          {{!-- <p>{{price}}$</p> --}}
+          {{#if promo}}
+          <div class="promo-price-container">
+            <p class="original-price"> {{price}}.00$</p>
+            <p class="promo-price">{{promoPrice}}.00$</p>
+          </div>
+          {{/if}}
           <h3>{{type}}</h3>
           <h4>{{shortDescription}}</h4>
           <a class="btn" href="/details/{{_id}}">Shop Now!</a>
@@ -77,6 +84,9 @@
   {{#each mostFavorited}}
   {{#if isFavorited}}
   <div class="favorited">
+    {{#if promo}}
+    <div class="promo-message">promo</div>
+    {{/if}}
     <a href="/details/{{_id}}">
       <img src="{{image}}" alt="img" />
     </a>
@@ -85,7 +95,14 @@
     <p> <i class="fas fa-check"></i> {{char}} </p>
     {{/each}}
     <div class="price-logo">
-      <p>{{price}}$</p>
+      {{#if promo}}
+      <div class="promo-price-container">
+        <p class="original-price">{{price}}.00$</p>
+        <p class="promo-price">{{promoPrice}}.00$</p>
+      </div>
+      {{else}}
+      <p>{{price}}.00$</p>
+      {{/if}}
       <a href="/products/{{type}}?page=1&productsPerPage=5&brand={{brand}}">
         <img src="{{brandLogo}}" />
       </a>

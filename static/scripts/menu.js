@@ -22,3 +22,20 @@ errorMessages.forEach((e) => {
     errorContainer.removeChild(e.target.parentElement);
   });
 });
+
+//section
+
+if (document.URL.includes("gaming_peripherials")) {
+  const section = document.querySelector(".gaming-periphery-side-bar");
+  const sectionChildren = document.querySelectorAll(
+    ".gaming-periphery-side-bar > a"
+  );
+
+  section.addEventListener("click", (e) => {
+    sectionChildren.forEach((c) => {
+      c.style.backgroundColor = "";
+    });
+
+    e.target.style.backgroundColor = "lightgray";
+  });
+}

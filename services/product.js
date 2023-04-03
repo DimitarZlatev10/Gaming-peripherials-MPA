@@ -9,6 +9,10 @@ async function getFiveProducts() {
   return Product.find({}).limit(5).lean();
 }
 
+async function getFivePromoProducts() {
+  return Product.find({ promo: true }).limit(5).lean();
+}
+
 async function getSimilarProducts(type, currentProductId, from, to) {
   return Product.find({
     _id: { $ne: currentProductId },
@@ -335,4 +339,5 @@ module.exports = {
   addToCart,
   removeFromCart,
   getMostFavoritedProducts,
+  getFivePromoProducts,
 };

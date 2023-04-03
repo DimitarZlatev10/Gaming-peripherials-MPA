@@ -25,6 +25,12 @@ const productSchema = new Schema({
     type: Number,
     required: true,
   },
+  promo: {
+    type: Boolean,
+  },
+  promoPrice: {
+    type: Number,
+  },
   type: {
     type: String,
     required: true,
@@ -32,6 +38,18 @@ const productSchema = new Schema({
   available: {
     type: Boolean,
     required: true,
+  },
+  brand: {
+    type: String,
+  },
+  brandLogo: {
+    type: String,
+  },
+  color: {
+    type: String,
+  },
+  connectivity: {
+    type: String,
   },
   favourites: {
     type: [ObjectId],

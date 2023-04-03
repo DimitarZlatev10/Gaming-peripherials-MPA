@@ -22,7 +22,13 @@
 
   <div class="price-section-container">
     <div class="price-section">
+      {{#if product.promo}}
+      <h1>{{product.promoPrice}}.00$</h1>
+      <h2>{{product.price}}.00$</h2>
+
+      {{else}}
       <h1>{{product.price}}$</h1>
+      {{/if}}
     </div>
     <div class="availability-section">
       {{#if product.available}}

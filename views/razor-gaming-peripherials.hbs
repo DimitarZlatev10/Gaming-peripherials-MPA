@@ -27,7 +27,14 @@
         <p> <i class="fas fa-check"></i> {{char}}</p>
         {{/each}}
         <div class="price-logo">
+            {{#if promo}}
+            <div class="promo-price-container">
+                <p class="original-price">{{price}}.00$</p>
+                <p class="promo-price">{{promoPrice}}.00$</p>
+            </div>
+            {{else}}
             <p>{{price}}$</p>
+            {{/if}}
         </div>
     </div>
     {{/each}}
@@ -52,7 +59,14 @@
         <p> <i class="fas fa-check"></i> {{char}}</p>
         {{/each}}
         <div class="price-logo">
+            {{#if promo}}
+            <div class="promo-price-container">
+                <p class="original-price">{{price}}.00$</p>
+                <p class="promo-price">{{promoPrice}}.00$</p>
+            </div>
+            {{else}}
             <p>{{price}}$</p>
+            {{/if}}
         </div>
     </div>
     {{/each}}
@@ -77,7 +91,14 @@
         <p> <i class="fas fa-check"></i> {{char}}</p>
         {{/each}}
         <div class="price-logo">
+            {{#if promo}}
+            <div class="promo-price-container">
+                <p class="original-price">{{price}}.00$</p>
+                <p class="promo-price">{{promoPrice}}.00$</p>
+            </div>
+            {{else}}
             <p>{{price}}$</p>
+            {{/if}}
         </div>
     </div>
     {{/each}}
