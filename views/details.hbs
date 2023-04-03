@@ -119,9 +119,9 @@
       <img src="{{image}}" alt="img" />
     </a>
     <h1>{{title}}</h1>
-    <p>{{connectivity}}</p>
-    <p>{{type}}</p>
-    <p>{{color}}</p>
+    {{#each mainCharacteristics}}
+    <p> <i class="fas fa-check"></i> {{char}}</p>
+    {{/each}}
     <div class="price-logo">
       <p>{{price}}$</p>
       <a href="/products/{{type}}?page=1&productsPerPage=5&brand={{brand}}">

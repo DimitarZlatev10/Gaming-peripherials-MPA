@@ -184,9 +184,11 @@
     <h1>
       {{title}}
     </h1>
+    {{#each mainCharacteristics}}
     <h2>
-      {{shortDescription}}
+      <i class="fas fa-check"></i> {{char}}
     </h2>
+    {{/each}}
     <p>{{price}}.00$</p>
     <div class="buttons-container">
       {{#if isAddedToCart}}

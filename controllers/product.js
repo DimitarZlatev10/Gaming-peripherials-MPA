@@ -444,4 +444,60 @@ router.get("/products-category", async (req, res) => {
   });
 });
 
+router.get("/razor_gaming_peripherials", async (req, res) => {
+  let mouses = [];
+  let keyboards = [];
+  let headphones = [];
+
+  const products = await getAllProductsByBrand("razor");
+
+  products.forEach((p) => {
+    if (p.type == "mouse") {
+      mouses.push(p);
+    } else if (p.type == "keyboard") {
+      keyboards.push(p);
+    } else if (p.type == "headphones") {
+      headphones.push(p);
+    }
+  });
+
+  res.render("razor-gaming-peripherials", {
+    title: "Razor-Gaming-Peripherials",
+    mouses,
+    keyboards,
+    headphones,
+    mousesLength: mouses.length,
+    keyboardsLength: keyboards.length,
+    headphonesLength: headphones.length,
+  });
+});
+
+router.get("/asus_gaming_peripherials", async (req, res) => {
+  let mouses = [];
+  let keyboards = [];
+  let headphones = [];
+
+  const products = await getAllProductsByBrand("asus");
+
+  products.forEach((p) => {
+    if (p.type == "mouse") {
+      mouses.push(p);
+    } else if (p.type == "keyboard") {
+      keyboards.push(p);
+    } else if (p.type == "headphones") {
+      headphones.push(p);
+    }
+  });
+
+  res.render("asus-gaming-peripherials", {
+    title: "Asus-Gaming-Peripherials",
+    mouses,
+    keyboards,
+    headphones,
+    mousesLength: mouses.length,
+    keyboardsLength: keyboards.length,
+    headphonesLength: headphones.length,
+  });
+});
+
 module.exports = router;

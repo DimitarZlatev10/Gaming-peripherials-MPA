@@ -1,0 +1,87 @@
+<div class="header-picture">
+    <img src="/static/images/asus-panel.jpg" alt="">
+</div>
+
+<p class="gaming-periphery-title">
+    Choose your new gaming periphery from <span>Asus</span> and jump into the world of games!
+</p>
+
+<div class="gaming-periphery-side-bar">
+    <a href="#mouses">Asus Mouses</a>
+    <a href="#keyboards">Asus Keyboards</a>
+    <a href="#headphones">Asus Headphones</a>
+</div>
+
+<section id="mouses">
+    <h1 class="gaming-periphery-product-title">Asus Mouses <span>({{mousesLength}})</span></h1>
+</section>
+<div class="gaming-periphery-container">
+    {{#if mouses}}
+    {{#each mouses}}
+    <div class="gaming-periphery-product">
+        <a href="/details/{{_id}}">
+            <img src="{{image}}" alt="">
+        </a>
+        <h1>{{title}}</h1>
+        {{#each mainCharacteristics}}
+        <p> <i class="fas fa-check"></i> {{char}}</p>
+        {{/each}}
+        <div class="price-logo">
+            <p>{{price}}$</p>
+        </div>
+    </div>
+    {{/each}}
+    {{else}}
+    <p>No results found!</p>
+    {{/if}}
+</div>
+
+
+<section id="keyboards">
+    <h1 class="gaming-periphery-product-title">Asus Keyboards <span>({{keyboardsLength}})</span></h1>
+</section>
+<div class="gaming-periphery-container">
+    {{#if keyboards}}
+    {{#each keyboards}}
+    <div class="gaming-periphery-product">
+        <a href="/details/{{_id}}">
+            <img src="{{image}}" alt="">
+        </a>
+        <h1>{{title}}</h1>
+        {{#each mainCharacteristics}}
+        <p> <i class="fas fa-check"></i> {{char}}</p>
+        {{/each}}
+        <div class="price-logo">
+            <p>{{price}}$</p>
+        </div>
+    </div>
+    {{/each}}
+    {{else}}
+    <p>No results found!</p>
+    {{/if}}
+</div>
+
+
+<section id="headphones">
+    <h1 class="gaming-periphery-product-title">Asus Headphones <span>({{headphonesLength}})</span></h1>
+</section>
+<div class="gaming-periphery-container">
+    {{#if headphones}}
+    {{#each headphones}}
+    <div class="gaming-periphery-product">
+        <a href="/details/{{_id}}">
+            <img src="{{image}}" alt="">
+        </a>
+        <h1>{{title}}</h1>
+        {{#each mainCharacteristics}}
+        <p> <i class="fas fa-check"></i> {{char}}</p>
+        {{/each}}
+        <div class="price-logo">
+            <p>{{price}}$</p>
+        </div>
+    </div>
+    {{/each}}
+    {{else}}
+    <p>No results found!</p>
+    {{/if}}
+</div>
