@@ -384,6 +384,7 @@
   flex-direction: column;
   padding: 10px;
   z-index: 1;
+  position: relative;
 }
 
 .gaming-periphery-product:hover {
@@ -1186,7 +1187,6 @@ textarea {
   position: relative;
 }
 
-
 .favorited > a > img {
   padding: 10px;
   cursor: pointer;
@@ -1196,7 +1196,7 @@ textarea {
   height: 200px;
 }
 
-.favorited >a {
+.favorited > a {
   align-items: center;
   justify-content: center;
 }
@@ -2055,7 +2055,6 @@ textarea {
     position: relative;
   }
 
-
   .active-filters {
     position: relative;
     top: 110px;
@@ -2297,7 +2296,6 @@ textarea {
   .gaming-periphery-side-bar {
     margin-left: 10px;
   }
-
 
   .active-filters {
     position: relative;

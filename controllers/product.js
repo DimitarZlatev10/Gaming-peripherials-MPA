@@ -16,6 +16,14 @@ const {
   removeFromFavourites,
   addToCart,
   removeFromCart,
+  getAllPromoProducts,
+  paginateByPromoBrandAndPrice,
+  paginateByPromoAndBrand,
+  paginateByPromoAndPriceRange,
+  paginateByPromo,
+  getAllProductsByPromoBrandAndPrice,
+  getAllProductsByPromoAndBrand,
+  getAllProductsByPromoAndPriceRange,
 } = require("../services/product");
 const { mapErrors } = require("../utils/errorDisplayer");
 const {
@@ -228,6 +236,7 @@ router.get("/products/:type", async (req, res) => {
   let priceRange = req.query.priceRange;
   let brand = req.query.brand;
   let sort = req.query.sort;
+  let promo = req.query.promo;
 
   if (type != "mouse" && type != "keyboard" && type != "headphones") {
     res.redirect("/products");
@@ -312,7 +321,53 @@ router.get("/products/:type", async (req, res) => {
   let products;
   let totalProducts;
 
-  if (brand && priceRange) {
+  if (promo && brand && priceRange) {
+    let from = Number(priceRange.split("/")[0]);
+    let to = Number(priceRange.split("/")[1]);
+
+    products = await paginateByPromoBrandAndPrice(
+      page - 1,
+      productsPerPage,
+      type,
+      brand,
+      from,
+      to,
+      sort
+    );
+
+    totalProducts = (
+      await getAllProductsByPromoBrandAndPrice(type, brand, from, to)
+    ).length;
+  } else if (promo && brand) {
+    products = await paginateByPromoAndBrand(
+      page - 1,
+      productsPerPage,
+      type,
+      brand,
+      sort
+    );
+
+    totalProducts = (await getAllProductsByPromoAndBrand(type, brand)).length;
+  } else if (promo && priceRange) {
+    let from = Number(priceRange.split("/")[0]);
+    let to = Number(priceRange.split("/")[1]);
+
+    products = await paginateByPromoAndPriceRange(
+      page - 1,
+      productsPerPage,
+      type,
+      from,
+      to,
+      sort
+    );
+
+    totalProducts = (await getAllProductsByPromoAndPriceRange(type, from, to))
+      .length;
+  } else if (promo) {
+    products = await paginateByPromo(page - 1, productsPerPage, type, sort);
+
+    totalProducts = (await getAllPromoProducts(type)).length;
+  } else if (brand && priceRange) {
     let from = Number(priceRange.split("/")[0]);
     let to = Number(priceRange.split("/")[1]);
 
@@ -368,6 +423,7 @@ router.get("/products/:type", async (req, res) => {
         type: type,
         brand: brand ? brand : false,
         sort: sort,
+        promo: promo ? promo : false,
       });
     } else {
       pageIndex.push({
@@ -378,6 +434,7 @@ router.get("/products/:type", async (req, res) => {
         type: type,
         brand: brand ? brand : false,
         sort: sort,
+        promo: promo ? promo : false,
       });
     }
   }
@@ -426,6 +483,7 @@ router.get("/products/:type", async (req, res) => {
     sort,
     selectedSortFilter,
     activeFilters,
+    promo,
   });
 });
 

@@ -19,6 +19,9 @@
     {{#if mouses}}
     {{#each mouses}}
     <div class="gaming-periphery-product">
+        {{#if promo}}
+        <div class="promo-message">promo</div>
+        {{/if}}
         <a href="/details/{{_id}}">
             <img src="{{image}}" alt="">
         </a>
@@ -51,6 +54,9 @@
     {{#if keyboards}}
     {{#each keyboards}}
     <div class="gaming-periphery-product">
+        {{#if promo}}
+        <div class="promo-message">promo</div>
+        {{/if}}
         <a href="/details/{{_id}}">
             <img src="{{image}}" alt="">
         </a>
@@ -83,6 +89,9 @@
     {{#if headphones}}
     {{#each headphones}}
     <div class="gaming-periphery-product">
+        {{#if promo}}
+        <div class="promo-message">promo</div>
+        {{/if}}
         <a href="/details/{{_id}}">
             <img src="{{image}}" alt="">
         </a>

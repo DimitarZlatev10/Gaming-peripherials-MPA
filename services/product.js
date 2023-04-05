@@ -132,6 +132,197 @@ async function getAllProductsByPrice(from, to, type) {
   }).lean();
 }
 
+async function getAllProductsByPromoBrandAndPrice(type, brand, from, to) {
+  return Product.find({
+    promo: true,
+    type: type,
+    brand: brand,
+    promoPrice: { $gte: from, $lte: to },
+  }).lean();
+}
+
+async function paginateByPromoBrandAndPrice(
+  page,
+  productsPerPage,
+  type,
+  brand,
+  from,
+  to,
+  sort
+) {
+  if (sort) {
+    if (sort == "price_lowest") {
+      return Product.find({
+        promo: true,
+        promoPrice: { $gte: from, $lte: to },
+        brand: brand,
+        type: type,
+      })
+        .sort({ promoPrice: 1 })
+        .skip(page * productsPerPage)
+        .limit(productsPerPage)
+        .lean();
+    } else if (sort == "price_highest") {
+      return Product.find({
+        promo: true,
+        promoPrice: { $gte: from, $lte: to },
+        brand: brand,
+        type: type,
+      })
+        .sort({ promoPrice: -1 })
+        .skip(page * productsPerPage)
+        .limit(productsPerPage)
+        .lean();
+    }
+  }
+
+  return Product.find({
+    promo: true,
+    promoPrice: { $gte: from, $lte: to },
+    brand: brand,
+    type: type,
+  })
+    .sort({ promoPrice: 1 })
+    .skip(page * productsPerPage)
+    .limit(productsPerPage)
+    .lean();
+}
+
+async function getAllProductsByPromoAndBrand(type, brand) {
+  return Product.find({
+    promo: true,
+    type: type,
+    brand: brand,
+  });
+}
+
+async function paginateByPromoAndBrand(
+  page,
+  productsPerPage,
+  type,
+  brand,
+  sort
+) {
+  if (sort) {
+    if (sort == "price_lowest") {
+      return Product.find({
+        promo: true,
+        // promoPrice: { $gte: from, $lte: to },
+        brand: brand,
+        type: type,
+      })
+        .sort({ promoPrice: 1 })
+        .skip(page * productsPerPage)
+        .limit(productsPerPage)
+        .lean();
+    } else if (sort == "price_highest") {
+      return Product.find({
+        promo: true,
+        // promoPrice: { $gte: from, $lte: to },
+        brand: brand,
+        type: type,
+      })
+        .sort({ promoPrice: -1 })
+        .skip(page * productsPerPage)
+        .limit(productsPerPage)
+        .lean();
+    }
+  }
+
+  return Product.find({
+    promo: true,
+    // promoPrice: { $gte: from, $lte: to },
+    brand: brand,
+    type: type,
+  })
+    .sort({ promoPrice: 1 })
+    .skip(page * productsPerPage)
+    .limit(productsPerPage)
+    .lean();
+}
+
+async function getAllProductsByPromoAndPriceRange(type, from, to) {
+  return Product.find({
+    promo: true,
+    type: type,
+    promoPrice: { $gte: from, $lte: to },
+  });
+}
+
+async function paginateByPromoAndPriceRange(
+  page,
+  productsPerPage,
+  type,
+  from,
+  to,
+  sort
+) {
+  if (sort) {
+    if (sort == "price_lowest") {
+      return Product.find({
+        promo: true,
+        promoPrice: { $gte: from, $lte: to },
+        // brand: brand,
+        type: type,
+      })
+        .sort({ promoPrice: 1 })
+        .skip(page * productsPerPage)
+        .limit(productsPerPage)
+        .lean();
+    } else if (sort == "price_highest") {
+      return Product.find({
+        promo: true,
+        promoPrice: { $gte: from, $lte: to },
+        // brand: brand,
+        type: type,
+      })
+        .sort({ promoPrice: -1 })
+        .skip(page * productsPerPage)
+        .limit(productsPerPage)
+        .lean();
+    }
+  }
+
+  return Product.find({
+    promo: true,
+    promoPrice: { $gte: from, $lte: to },
+    // brand: brand,
+    type: type,
+  })
+    .sort({ promoPrice: 1 })
+    .skip(page * productsPerPage)
+    .limit(productsPerPage)
+    .lean();
+}
+
+async function paginateByPromo(page, productsPerPage, type, sort) {
+  if (sort) {
+    if (sort == "price_lowest") {
+      return Product.find({ type: type, promo: true })
+        .sort({ promoPrice: 1 })
+        .skip(page * productsPerPage)
+        .limit(productsPerPage)
+        .lean();
+    } else if (sort == "price_highest") {
+      return Product.find({ type: type, promo: true })
+        .sort({ promoPrice: -1 })
+        .skip(page * productsPerPage)
+        .limit(productsPerPage)
+        .lean();
+    }
+  }
+
+  return Product.find({ type: type, promo: true })
+    .sort({ promoPrice: 1 })
+    .skip(page * productsPerPage)
+    .limit(productsPerPage)
+    .lean();
+}
+
+async function getAllPromoProducts(type) {
+  return Product.find({ type: type, promo: true }).lean();
+}
+
 async function getAllProductsByType(type) {
   return Product.find({ type: type }).lean();
 }
@@ -340,4 +531,12 @@ module.exports = {
   removeFromCart,
   getMostFavoritedProducts,
   getFivePromoProducts,
+  getAllPromoProducts,
+  paginateByPromoBrandAndPrice,
+  paginateByPromoAndBrand,
+  paginateByPromoAndPriceRange,
+  paginateByPromo,
+  getAllProductsByPromoBrandAndPrice,
+  getAllProductsByPromoAndBrand,
+  getAllProductsByPromoAndPriceRange,
 };
