@@ -11,13 +11,20 @@ router.get("/", async (req, res) => {
 
   delete req.session.redirectUrl;
 
+  let results = false;
   mostFavorited.forEach((f) => {
     if (f.favourites.length > 0) {
       f.isFavorited = true;
+      results = true;
     }
   });
 
-  res.render("home", { title: "Home Page", products, mostFavorited });
+  res.render("home", {
+    title: "Home Page",
+    products,
+    mostFavorited,
+    results,
+  });
 });
 
 module.exports = router;
